@@ -25,11 +25,20 @@ export class NotaCorretagem {
             this.taxaAna +
             this.emolumentos +
             this.corregatem +
+            this.iss +
             this.outrasDespesas
         );
     }
 
     totalNota(): number {
-        return 0;
+        let total = 0;
+        this.operacoes.forEach((o: Operacao) => {
+            if (o.tipoOperacao === 'COMPRA') {
+                total -= o.totalOperacao;
+            } else {
+                total += o.totalOperacao;
+            }
+        });
+        return total + this.totalTaxas();
     }
 }

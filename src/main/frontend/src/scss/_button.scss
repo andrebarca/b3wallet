@@ -163,21 +163,21 @@ Form component styles
 
     &::before {
       top: #{$arrowSize * -2};
-      border-bottom: #{$arrowSize} solid $form-control-border-color;
+      border-bottom: #{$arrowSize} solid #{$form-control-border-color};
     }
     &::after {
       top: #{($arrowSize - 1) * -2};
-      border-bottom: #{$arrowSize} solid $list-background-color;
+      border-bottom: #{$arrowSize} solid #{$list-background-color};
     }    
   }
 
   &-list {
     list-style-type: none;
-    background-color: $list-background-color;
+    background-color: #{$list-background-color};
     padding: #{$margin / 2};
     margin: 0;
     overflow-y: auto;
-    box-shadow: 0 0 10px $shadow-color;
+    box-shadow: 0 0 10px #{$shadow-color-dark};
     border: $form-control-border;
 
     max-height: 64vh;

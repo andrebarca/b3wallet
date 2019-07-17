@@ -28,7 +28,7 @@ List component styles
 
     &:hover {
       transition: all .25s ease;
-      background-color: lighten($list-background-color, 5%);
+      background-color: scale-color($list-background-color, 5%);
     }
 
     & + & {
@@ -47,7 +47,7 @@ List component styles
     }
 
     &.selected {
-      background-color: lighten($list-background-color, 10%);
+      background-color: scale-color($list-background-color, 10%);
     }
 
     &.expanded &-block {

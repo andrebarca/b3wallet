@@ -6,7 +6,7 @@ Modal component styles
 .modal {
   display: flex;
   flex-direction: column;
-  box-shadow: 2px 4px 10px $shadow-color, -2px -3px 20px lighten($shadow-color, 20%);
+  box-shadow: 2px 4px 10px $shadow-color-dark, -2px -3px 20px $shadow-color-dark;
   background: $container-background-color;
   overflow: hidden;
   width: 100%;
@@ -21,6 +21,11 @@ Modal component styles
   @media(min-width: $large-device) {
     width: 50%;
     height: auto;
+  }
+
+  &.fullscreen {
+    width: 100vw;
+    height: 100vh;
   }
 
 
@@ -43,7 +48,7 @@ Modal component styles
     align-items: center;
     height: 60px;
     padding: $padding;
-    color: lighten($default-color, 50%);
+    color: scale-color($default-color, 80%);
     background: darken($default-color, 5%);
     border-bottom: 1px solid darken($container-background-color, 25%);
   }
@@ -72,6 +77,7 @@ Modal component styles
     flex-wrap: wrap;
     flex: 1 1 100%;
     padding: $padding;
+    overflow-y: auto;
   }
 
   &-footer {

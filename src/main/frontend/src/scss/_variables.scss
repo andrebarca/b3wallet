@@ -19,7 +19,8 @@ $disabled-opacity: 0.5;
 //=========================================================================
 $body-background: #f5f5fa;
 $link-color: #777777;
-$shadow-color: #55555588;
+$shadow-color-dark: #55555588;
+$shadow-color-light: #55555588;
 $border-color: #9c9c9c;
 $border-dark-color: #3b3b3b;
 //=========================================================================
@@ -49,8 +50,8 @@ $grid-divisor: 12;
 //Navbar component variables
 //=========================================================================
 $nav-background-color-1: $primary-color;
-$nav-background-color-2: $default-color;
-$nav-background: linear-gradient(90deg, lighten($nav-background-color-1, 10%) 0, $nav-background-color-2 20%);
+$nav-background-color-2:$default-color;
+$nav-background: linear-gradient(90deg, scale-color($nav-background-color-1, 10%) 0, $nav-background-color-2 20%);
 $nav-border-color: darken($nav-background-color-2, 5%);
 $nav-bar-height: 60px;
 $nav-search-height: 40px;

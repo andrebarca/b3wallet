@@ -34,7 +34,7 @@ Table component styles
         width: 100%;
 
         td:nth-last-child(1) {
-            background: lighten($list-background-color, 25%);
+            background: scale-color($list-background-color, 25%);
         }
     }
 
@@ -44,7 +44,7 @@ Table component styles
         flex-wrap: wrap;
         flex: 1;
         align-items: center;
-        border-top: 1px solid lighten($list-border-color, 15%);
+        border-top: 1px solid scale-color($list-border-color, 15%);
 
         &::before {
             content: attr(title);
@@ -69,7 +69,7 @@ Table component styles
             transition: background-color .2s ease-out;
             &:hover {
               transition: background-color .2s ease-in;
-              background-color: lighten($light-background, 100%);
+              background-color: scale-color($light-background, 100%);
             }
           }
         }

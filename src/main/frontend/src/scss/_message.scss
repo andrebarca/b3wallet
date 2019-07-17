@@ -12,7 +12,7 @@ Toast messages
     background-color: $light-background;
     border: 1px solid $border-color;
     border-radius: $border-radius;
-    box-shadow: 12px 12px 20px 0 $shadow-color, 0 0 8px 0 lighten($shadow-color, 10%);
+    box-shadow: 12px 12px 20px 0 $shadow-color-dark, 0 0 8px 0 $shadow-color-dark;
     transition: all .25s ease-in;
     opacity: 1.0;
     transform: scale(1) rotateY(0);

@@ -157,7 +157,7 @@ Generic component styles
 
         & > * {
             &::before {
-                text-shadow: 3px 3px 10px $shadow-color;
+                text-shadow: 3px 3px 10px $shadow-color-dark;
             }
         }
 
@@ -165,7 +165,7 @@ Generic component styles
           transform: scale(1.2);
           transition: all .2s ease-in-out;
           &::before {
-            text-shadow: 12px 6px 20px $shadow-color;
+            text-shadow: 12px 6px 20px $shadow-color-dark;
           }
         }
     }
@@ -224,7 +224,7 @@ Generic component styles
     border-radius: 50%;
     width: $circle-size;
     height: $circle-size;
-    background: lighten($list-background-color, 5%);
+    background: scale-color($list-background-color, 5%);
     border: 1px solid $list-border-color;
     font-size: 0.75em;
 }
@@ -258,7 +258,7 @@ Container component styles
     margin: 0;
     max-width: 1200px;
     min-height: calc(100vh - #{$nav-bar-height + $margin * 2});
-    border: 1px solid lighten($border-color, 25%);
+    border: 1px solid scale-color($border-color, 25%);
     background: $container-background-color;
     padding: $padding;
     z-index: 1;

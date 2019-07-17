@@ -6,6 +6,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -51,7 +52,6 @@ public class NotaCorretagem extends Base {
 
 
     private static final long serialVersionUID = 1L;
-
     private Long numero;
 
     @Temporal(TemporalType.DATE)
@@ -59,7 +59,8 @@ public class NotaCorretagem extends Base {
     private Date dataPregao;
 
     @OneToMany(mappedBy = "notaCorretagem", orphanRemoval = true, cascade = CascadeType.ALL )
-    @JsonIgnoreProperties({ "notaCorretagem" })
+    @JsonIgnoreProperties(value = { "notaCorretagem" }, allowSetters = true)
+    @OrderBy("id asc, tipoOperacao asc")
     private Set<Operacao> operacoes;
 
     private Double taxaLiquidacao;

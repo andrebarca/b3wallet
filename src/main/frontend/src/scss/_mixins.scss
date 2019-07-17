@@ -4,7 +4,7 @@
 
 @mixin disabled-status {
   &[disabled] {
-    opacity: $disabled-opacity;
+    opacity: #{$disabled-opacity};
     cursor: not-allowed;
   }
 }

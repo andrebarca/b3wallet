@@ -20,7 +20,7 @@ export class OperacaoComponent implements OnInit {
     selectedOperacao: Operacao = null;
     dataOperacaoFilter: Option = null;
     tipoOperacaoFilter: Option = null;
-    exibeNotaCorretagemOperacaoFilter: number = 0;
+    exibeNotaCorretagemOperacaoFilter = 0;
 
     constructor (
       private util: Util,
@@ -52,6 +52,7 @@ export class OperacaoComponent implements OnInit {
       this.operacaoService.list().subscribe(response => this.operacoes = response.body);
       this.operacaoService.listOptionsDataOperacao().subscribe(response => this.optionsDataOperacao = response.body);
       this.notaCorretagemService.list().subscribe(response => {
+        this.notasCorretagem.splice(0, this.notasCorretagem.length);
         response.body.forEach(notaCorretagem => this.notasCorretagem.push(Object.assign(new NotaCorretagem(), notaCorretagem)));
       });
     }
@@ -146,7 +147,8 @@ export class OperacaoComponent implements OnInit {
 
     //edit nota
     edit(notaCorretagem: NotaCorretagem): void {
-      this.notaCorretagemService.get(notaCorretagem).subscribe(response => this.selectedNotaCorretagem = response.body);
+      this.notaCorretagemService.get(notaCorretagem)
+      .subscribe(response => this.selectedNotaCorretagem = Object.assign(new NotaCorretagem(), response.body));
     }
 
     delete(notaCorretagem: NotaCorretagem): void {

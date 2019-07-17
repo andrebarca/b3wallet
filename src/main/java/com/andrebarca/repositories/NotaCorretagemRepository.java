@@ -31,7 +31,7 @@ public interface NotaCorretagemRepository extends CrudRepository<NotaCorretagem,
     @Query("select nc from NotaCorretagem nc where nc.id = ?1")
     NotaCorretagem getById(Long id);
 
-    List<NotaCorretagem> findAll(Sort sort);
+    List<NotaCorretagem> findAll(Sort sort);    
     
     @Query("select dataPregao from NotaCorretagem")
     List<Date> listAllDataNotaCorretagem();
