@@ -1,5 +1,8 @@
 package com.andrebarca.services;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.andrebarca.models.NotaCorretagem;
 import com.andrebarca.repositories.NotaCorretagemRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -53,6 +56,16 @@ public class NotaCorretagemService {
 	@RequestMapping(value = "/api/notas-de-corretagem", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> list() {
 		Iterable<NotaCorretagem> notasCorretagem = this.notaCorretagemRepository.findAll();
+		notasCorretagem.forEach(nota -> {
+			System.out.println(nota.getTotalTaxas());
+			double taxas = nota.getTotalTaxas();
+			List<Double> valoresOp = new ArrayList<>();
+			nota.getOperacoes().forEach(op -> {
+				valoresOp.add(op.getQuantidade() * op.getValor());
+			});
+			double totalOp = valoresOp.stream().mapToDouble(mapper -> {return mapper;}).sum();
+			System.out.println("taxas / totalOp: " + (taxas / totalOp));
+		});
 		return new ResponseEntity<>(notasCorretagem, HttpStatus.OK);
 	}
 }

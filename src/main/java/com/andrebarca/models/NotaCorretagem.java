@@ -25,28 +25,14 @@ public class NotaCorretagem extends Base {
         Long numero,
         Date dataPregao,
         Set<Operacao> operacoes,
-        Double taxaLiquidacao,
-        Double taxaRegistro,
-        Double taxaTermo,
-        Double taxaAna,
-        Double emolumentos,
-        Double corregatem,
-        Double iss,
-        Double irrf,
-        Double outrasDespesas        
+        Double custosOperacionais,
+        Double irrf
     ) {
         this.numero = numero;
         this.dataPregao = dataPregao;
         this.operacoes = operacoes;
-        this.taxaLiquidacao = taxaLiquidacao;
-        this.taxaRegistro = taxaRegistro;
-        this.taxaTermo = taxaTermo;
-        this.taxaAna = taxaAna;
-        this.emolumentos = emolumentos;
-        this.corregatem = corregatem;
-        this.iss = iss;
-        this.irrf = irrf;
-        this.outrasDespesas = outrasDespesas;
+        this.custosOperacionais = custosOperacionais;
+        this.irrf = custosOperacionais;
     }
 
 
@@ -63,23 +49,9 @@ public class NotaCorretagem extends Base {
     @OrderBy("id asc, tipoOperacao asc")
     private Set<Operacao> operacoes;
 
-    private Double taxaLiquidacao;
-
-    private Double taxaRegistro;
-
-    private Double taxaTermo;
-
-    private Double taxaAna;
-
-    private Double emolumentos;
-
-    private Double corregatem;
-
-    private Double iss;
-
+    private Double custosOperacionais;
+    
     private Double irrf;
-
-    private Double outrasDespesas;
 
     public Long getNumero() {
         return numero;
@@ -113,78 +85,35 @@ public class NotaCorretagem extends Base {
         this.operacoes = operacoes;
     }
 
-    public Double getTaxaLiquidacao() {
-        return taxaLiquidacao;
-    }
-
-    public void setTaxaLiquidacao(Double taxaLiquidacao) {
-        this.taxaLiquidacao = taxaLiquidacao;
-    }
-
-    public Double getTaxaRegistro() {
-        return taxaRegistro;
-    }
-
-    public void setTaxaRegistro(Double taxaRegistro) {
-        this.taxaRegistro = taxaRegistro;
-    }
-
-    public Double getTaxaTermo() {
-        return taxaTermo;
-    }
-
-    public void setTaxaTermo(Double taxaTermo) {
-        this.taxaTermo = taxaTermo;
-    }
-
-    public Double getTaxaAna() {
-        return taxaAna;
-    }
-
-    public void setTaxaAna(Double taxaAna) {
-        this.taxaAna = taxaAna;
-    }
-
-    public Double getEmolumentos() {
-        return emolumentos;
-    }
-
-    public void setEmolumentos(Double emolumentos) {
-        this.emolumentos = emolumentos;
+    /**
+     * @return the custos
+     */
+    public Double getcustosOperacionais() {
+        return custosOperacionais;
     }
 
     /**
-     * @return the corregatem
+     * @param custos the custos to set
      */
-    public Double getCorregatem() {
-        return corregatem;
+    public void setcustosOperacionais(Double custosOperacionais) {
+        this.custosOperacionais = custosOperacionais;
     }
 
-    public void setCorregatem(Double corregatem) {
-        this.corregatem = corregatem;
-    }
-
-    public Double getIss() {
-        return iss;
-    }
-
-    public void setIss(Double iss) {
-        this.iss = iss;
-    }
-
+    /**
+     * @return the irrf
+     */
     public Double getIrrf() {
         return irrf;
     }
 
+    /**
+     * @param irrf the irrf to set
+     */
     public void setIrrf(Double irrf) {
         this.irrf = irrf;
     }
 
-    public Double getOutrasDespesas() {
-        return outrasDespesas;
-    }
-
-    public void setOutrasDespesas(Double outrasDespesas) {
-        this.outrasDespesas = outrasDespesas;
+    public Double getTotalTaxas() {
+        return this.custosOperacionais + this.irrf;
     }
 }

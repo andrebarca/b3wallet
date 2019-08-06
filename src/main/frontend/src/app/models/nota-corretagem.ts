@@ -5,38 +5,18 @@ export class NotaCorretagem {
     numero: number;
     dataPregao: Date;
     operacoes: Operacao[] = [];
-    taxaLiquidacao: number = 0;
-    taxaRegistro: number = 0;
-    taxaTermo: number = 0;
-    taxaAna: number = 0;
-    emolumentos: number = 0;
-    corregatem: number = 0;
-    iss: number = 0;
-    irrf: number = 0;
-    outrasDespesas: number = 0;
+    custos = 0;
+    irrf = 0;
+    totalTaxas = 0;
     dataCriacao: Date;
     dataAtualizacao: Date;
 
-    get totalTaxas(): number {
-        return (
-            this.taxaLiquidacao +
-            this.taxaRegistro +
-            this.taxaTermo +
-            this.taxaAna +
-            this.emolumentos +
-            this.corregatem +
-            this.iss +
-            this.outrasDespesas
-        );
-    }
-
-
     get totalNota(): number {
-        const t = (total, value) => total + value;
-        let totalOperacoes: number[] = [];
+        const t = (total: number, value: number) => total + value;
+        const totalOperacoes: number[] = [];
         this.operacoes.forEach(o => {
-            totalOperacoes.push(o.tipoOperacao == 'COMPRA' ? o.totalOperacao * -1: o.totalOperacao);
+            totalOperacoes.push(o.tipoOperacao === 'COMPRA' ? o.totalOperacao * -1 : o.totalOperacao);
         });
-        return (totalOperacoes.reduce(t) - this.totalTaxas);
+        return totalOperacoes.length === 0 ? 0 : (totalOperacoes.reduce(t) - (this.custos + this.irrf));
     }
 }

@@ -1,14 +1,14 @@
 import { Operacao, Empresa } from '.';
 
  export class Papel {
-
     id: number;
     codigo: string;
     empresa: Empresa;
     operacoes: Operacao[] = [];
-    totalCompra: number = 0;
-    totalVenda: number = 0;
-    totalCustodia: number = 0;
-    precoMedio: number = 0;
-    totalLucro: number = 0;
+    totalCompra = 0;
+    totalVenda = 0;
+    totalCustodia = 0;
+    custos = 0;
+    precoMedio = 0;
+    totalLucro = 0;
 }

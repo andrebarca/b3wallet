@@ -115,9 +115,9 @@
           <tr>
             <th class="left">Número</th>
             <th class="left">Data do Pregão</th>
-            <th class="right">Taxas</th>
-            <th class="right">I.S.S.</th>
+            <th class="right">Outros custos</th>
             <th class="right">I.R.R.F</th>
+            <th class="right">Total taxas</th>
             <th class="right">Total Operações</th>
             <th></th>
           </tr>
@@ -126,9 +126,9 @@
           <tr *ngFor="let notaCorretagem of listNotasCorretagem()" [ngClass]="{'text-error': notaCorretagem.totalNota < 0}">
             <td title="Número">{{notaCorretagem.numero}}</td>
             <td title="Data do Pregão">{{notaCorretagem.dataPregao | date: 'dd/MM/yyyy'}}</td>
-            <td title="Taxas" class="right">{{(notaCorretagem.totalTaxas) | currency:'BRL':'symbol':'1.2-2' }}</td>
-            <td title="ISS" class="right">{{notaCorretagem.iss | currency:'BRL':'symbol':'1.2-2' }}</td>
+            <td title="Taxas" class="right">{{(notaCorretagem.custos) | currency:'BRL':'symbol':'1.2-2' }}</td>
             <td title="IRRF" class="right">{{notaCorretagem.irrf | currency:'BRL':'symbol':'1.2-2' }}</td>
+            <td title="IRRF" class="right">{{notaCorretagem.totalTaxas | currency:'BRL':'symbol':'1.2-2' }}</td>
             <td title="Total" class="right" >{{notaCorretagem.totalNota | currency:'BRL':'symbol':'1.2-2'}}</td>
             <td class="table-action center">
               <a title="editar nota de corretagem" class="link" (click)="edit(notaCorretagem)"><i class="fa fa-pencil"></i></a>

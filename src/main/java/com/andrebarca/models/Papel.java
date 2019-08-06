@@ -94,6 +94,13 @@ public class Papel extends Base {
   }
 
   @Transient
+  public Double getcustosOperacionais() {
+    return this.operacoes.stream().mapToDouble(operacao -> {
+      return operacao.getCustoOperacao();
+    }).sum();
+  }
+
+  @Transient
   public Double getPrecoMedio() {
     double totalCompra = 0;
     int totalQuantidade = 0;
