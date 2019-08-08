@@ -32,10 +32,8 @@ public class NotaCorretagem extends Base {
         this.dataPregao = dataPregao;
         this.operacoes = operacoes;
         this.custosOperacionais = custosOperacionais;
-        this.irrf = custosOperacionais;
+        this.irrf = irrf;
     }
-
-
 
     private static final long serialVersionUID = 1L;
     private Long numero;

@@ -8,7 +8,7 @@ import { Operacao, Empresa } from '.';
     totalCompra = 0;
     totalVenda = 0;
     totalCustodia = 0;
-    custos = 0;
+    custosOperacionais = 0;
     precoMedio = 0;
     totalLucro = 0;
 }

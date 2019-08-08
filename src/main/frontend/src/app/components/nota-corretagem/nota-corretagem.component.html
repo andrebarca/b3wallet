@@ -19,7 +19,7 @@
         </div>
         
         <div class="form-control g-12 g-m-6 g-l-2">
-          <input id="custos" name="custos" type="number" min="0" step="0.01" [(ngModel)]="notaCorretagem.custos" required>
+          <input id="custos" name="custos" type="number" min="0" step="0.01" [(ngModel)]="notaCorretagem.custosOperacionais" required>
           <label for="custos">Custos Operacionais</label>
         </div>
 
@@ -32,7 +32,7 @@
           
           <legend>Operações</legend>
 
-          <table #operacoes class="table editable">
+          <table #operacoes class="table editable clean">
             <thead>
               <tr>
                 <th class="left">Código</th>
@@ -40,8 +40,8 @@
                 <th class="right">Quantidade</th>
                 <th class="right">Valor</th>
                 <th class="right g-1">Total item</th>
-                <th class="center g-1">
-                  <button class="btn btn-flat" title="Adicionar operação" type="button" (click)="newOperacao()">
+                <th class="right g-1">
+                  <button class="btn" title="Adicionar operação" type="button" (click)="newOperacao()">
                     <i class="fa fa-plus"></i>
                   </button>
                 </th>
@@ -137,10 +137,10 @@
                 </td>
 
                 <td class="right g-1">
-                  {{(operacao.valor * operacao.quantidade) | currency:'BRL':'symbol':'1.2-2' }}
+                  <span class="static-text right">{{(operacao.valor * operacao.quantidade) | currency:'BRL':'symbol':'1.2-2' }}</span>
                 </td>
 
-                <td class="center g-1">
+                <td class="right actions g-1">
                   <button type="button" class="btn btn-flat" title="confirmar alteração" *ngIf="(isEditing() && operacao == selectedOperacao)" (click)="confirmOperacao()"><i class="fa fa-check"></i></button>
                   <button type="button" class="btn btn-flat" title="editar esta operação" *ngIf="!(isEditing() && operacao == selectedOperacao)" (click)="editOperacao(operacao)"><i class="fa fa-pencil"></i></button>
                   <button type="button" class="btn btn-flat margin-left-2" title="remover esta operação" (click)="removeOperacao(operacao)" [disabled]="!isOperacaoRemovable()">

@@ -136,6 +136,10 @@ Table component styles
         td {
           padding: 0;
 
+          &.actions {
+            padding: .5em;
+          }
+
           .static-text {
             margin: 0 #{$margin/2};
           }
@@ -154,6 +158,21 @@ Table component styles
               color: initial;
             }
           }
+        }
+      }
+    }
+
+    &.clean {
+      thead {
+        border: none;
+        background: $light-background;
+
+        tr, td, th {
+          border: none !important;
+        }
+
+        th {
+          padding: 1em .5em;
         }
       }
     }

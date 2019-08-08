@@ -5,7 +5,7 @@ export class NotaCorretagem {
     numero: number;
     dataPregao: Date;
     operacoes: Operacao[] = [];
-    custos = 0;
+    custosOperacionais = 0;
     irrf = 0;
     totalTaxas = 0;
     dataCriacao: Date;
@@ -17,6 +17,6 @@ export class NotaCorretagem {
         this.operacoes.forEach(o => {
             totalOperacoes.push(o.tipoOperacao === 'COMPRA' ? o.totalOperacao * -1 : o.totalOperacao);
         });
-        return totalOperacoes.length === 0 ? 0 : (totalOperacoes.reduce(t) - (this.custos + this.irrf));
+        return totalOperacoes.length === 0 ? 0 : (totalOperacoes.reduce(t) - (this.custosOperacionais + this.irrf));
     }
 }
