@@ -44,7 +44,7 @@ public class NotaCorretagem extends Base {
 
     @OneToMany(mappedBy = "notaCorretagem", orphanRemoval = true, cascade = CascadeType.ALL )
     @JsonIgnoreProperties(value = { "notaCorretagem" }, allowSetters = true)
-    @OrderBy("id asc, tipoOperacao asc")
+    @OrderBy("id asc")
     private Set<Operacao> operacoes;
 
     private Double custosOperacionais;
