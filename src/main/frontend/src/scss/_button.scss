@@ -52,7 +52,7 @@ Form component styles
     }
 
     &:focus {
-      color: darken($btn-background, 50%);
+      color: darken($btn-color-active, 20%);
     }
 
     &:hover {
@@ -60,6 +60,7 @@ Form component styles
     }
 
     &:active {
+      color: $btn-color-active;
       background-color: darken($btn-background, 20%);
       transition: all .1s ease-out;
       outline: 0;

@@ -92,6 +92,10 @@ export class NotaCorretagemComponent implements OnInit {
     return this.notaCorretagem.operacoes.length > 1;
   }
 
+  notaCorretagemIsValid(): boolean {
+    return true;
+  }
+
   selectedOperacaoModelValid(): boolean {
     if (this.selectedOperacao != null) {
       return this.selectedOperacao.papel != null &&

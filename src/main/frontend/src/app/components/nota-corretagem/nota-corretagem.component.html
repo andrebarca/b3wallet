@@ -1,5 +1,5 @@
 <form #notaCorretagemForm="ngForm" (ngSubmit)="save()" class="modal-wrapper">
-  <div class="modal fullscreen">
+  <div class="modal">
     <header class="modal-title">
       <h4>
         Nota de corretagem
@@ -32,7 +32,7 @@
           
           <legend>Operações</legend>
 
-          <table #operacoes class="table editable clean">
+          <table #operacoes class="table editable">
             <thead>
               <tr>
                 <th class="left">Código</th>
@@ -40,7 +40,7 @@
                 <th class="right">Quantidade</th>
                 <th class="right">Valor</th>
                 <th class="right g-1">Total item</th>
-                <th class="right g-1">
+                <th class="center g-1">
                   <button class="btn" title="Adicionar operação" type="button" (click)="newOperacao()">
                     <i class="fa fa-plus"></i>
                   </button>
@@ -154,7 +154,7 @@
       </div>
     </section>
     <footer class="modal-footer">
-      <button type="submit" [disabled]="!notaCorretagemForm.valid || selectedOperacao != null || notaCorretagem.operacoes.length == 0" class="btn btn-primary">salvar</button>
+      <button type="submit" [disabled]="!notaCorretagemIsValid()" class="btn btn-primary">salvar</button>
     </footer>
   </div>
 </form>

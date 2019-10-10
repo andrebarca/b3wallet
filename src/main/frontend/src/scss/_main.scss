@@ -114,6 +114,7 @@ Generic component styles
     &-text {
       text-align: left;
       padding: $padding 0;
+      flex: 1;
     }
 
     &-text-block {
@@ -139,10 +140,6 @@ Generic component styles
       align-content: center;
     }
 
-    :not(&-detail-block) + &-action {
-      margin-left: auto;
-    }
-
     &-action {
         position: fixed;
         bottom: $margin;
@@ -154,7 +151,7 @@ Generic component styles
         font-size: 1.5em;
         background-color: $light-background;
         transition: all .2s ease-in-out;
-
+        
         & > * {
             &::before {
                 text-shadow: 3px 3px 10px $shadow-color-dark;

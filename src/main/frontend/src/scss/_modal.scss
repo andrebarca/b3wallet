@@ -11,6 +11,7 @@ Modal component styles
   overflow: hidden;
   width: 100%;
   height: 100%;
+  max-height: 100vh;
 
   @media(min-width: $medium-device) {
     border-radius: $form-control-border-radius;
@@ -48,7 +49,7 @@ Modal component styles
     align-items: center;
     height: 60px;
     padding: $padding;
-    color: scale-color($default-color, 80%);
+    color: $dark-foreground;
     background: darken($default-color, 5%);
     border-bottom: 1px solid darken($container-background-color, 25%);
   }

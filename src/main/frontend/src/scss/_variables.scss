@@ -21,7 +21,7 @@ $body-background: #f5f5fa;
 $link-color: #777777;
 $shadow-color-dark: #55555588;
 $shadow-color-light: #55555588;
-$border-color: #9c9c9c;
+$border-color: #acacac;
 $border-dark-color: #3b3b3b;
 //=========================================================================
 //Pallete
@@ -30,9 +30,9 @@ $light-foreground: #333333;
 $dark-foreground: #efefef;
 $light-background: #fefefe;
 $dark-background: #333333;
-$default-color: #4d506b;
+$default-color: #264ebb;
 $primary-color: #ff005d;
-$secondary-color: #8a7ca5;
+$secondary-color: #4e2d91;
 
 //=========================================================================
 //Text Colors
@@ -63,13 +63,13 @@ $nav-border-color: darken($nav-background-color-2, 5%);
 $nav-bar-height: 60px;
 $nav-search-height: 40px;
 $nav-item-color: #eeeeee;
-$nav-item-color-active: #ffff55;
+$nav-item-color-active: #ffdd1d;
 
 //=========================================================================
 //Form component variables
 //=========================================================================
 $form-control-border-color: $border-color;
-$form-control-border: 1px solid $form-control-border-color;
+$form-control-border: thin solid $form-control-border-color;
 $form-control-border-radius: 4px;
 $form-control-height: 28px;
 $form-control-padding: 10px;
@@ -83,6 +83,7 @@ $form-color-invalid: #ee3333;
 $btn-color-primary: #fff;
 $btn-background-primary: #1a31a9;
 $btn-color: #eee;
+$btn-color-active: $message-success-color;
 $btn-background: $secondary-color;
 
 //=========================================================================
@@ -95,8 +96,8 @@ $list-height: 50px;
 //=========================================================================
 //Table component variables
 //=========================================================================
-$col-control-background: #f5f5f5;
-$row-control-background: #fff8b6;
+$col-control-background: #f8f8f8;
+$row-control-background: #ececec;
 
 //=========================================================================
 //Message component variables
