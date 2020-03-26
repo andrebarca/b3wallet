@@ -51,7 +51,7 @@ export class NotaCorretagemComponent implements OnInit {
 
   confirmOperacao(): void {
     if (this.newOperacaoFlag) {
-      this.notaCorretagem.operacoes.push(Object.assign(new Operacao(), this.selectedOperacao));
+      this.notaCorretagem.addOperacao(Object.assign(new Operacao(), this.selectedOperacao));
       this.selectedOperacao = null;
       this.newOperacaoFlag = false;
     }
@@ -74,9 +74,8 @@ export class NotaCorretagemComponent implements OnInit {
   }
 
   removeOperacao(operacao: Operacao): void {
-    const index = this.notaCorretagem.operacoes.findIndex(op => op == operacao);
-    if (index !== undefined && this.isOperacaoRemovable()) {
-      this.notaCorretagem.operacoes.splice(index, 1);
+    if (this.isOperacaoRemovable()) {
+      this.notaCorretagem.removeOperacao(operacao);
     }
   }
 

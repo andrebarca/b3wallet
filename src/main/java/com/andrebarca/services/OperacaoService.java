@@ -53,8 +53,8 @@ public class OperacaoService {
 
 	@RequestMapping(value = "/api/operacoes", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> list() {
-		Iterable<Operacao> operacoes = this.operacaoRepository.findAll(new Sort(Direction.ASC, "papel.codigo")
-				.and(new Sort(Direction.ASC, "dataOperacao")).and(new Sort(Direction.ASC, "tipoOperacao")));
+		Iterable<Operacao> operacoes = this.operacaoRepository.findAll(Sort.by(Direction.ASC, "papel.codigo")
+				.and(Sort.by(Direction.ASC, "dataOperacao")).and(Sort.by(Direction.ASC, "tipoOperacao")));
 		return new ResponseEntity<>(operacoes, HttpStatus.OK);
 	}
 

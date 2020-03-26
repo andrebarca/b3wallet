@@ -33,7 +33,7 @@ public class PapelService {
 
     @RequestMapping(value = "/api/papeis", method = RequestMethod.GET,  produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> list() {
-        Iterable<Papel> papeis = this.papelRepository.findAll(new Sort(Direction.ASC, "codigo"));
+        Iterable<Papel> papeis = this.papelRepository.findAll(Sort.by(Direction.ASC, "codigo"));
         return new ResponseEntity<>(papeis, HttpStatus.OK);
     }
 }

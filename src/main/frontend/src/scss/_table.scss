@@ -153,6 +153,10 @@ Table component styles
             select {
               border-width: 0;
               color: initial;
+
+              &:focus {
+                outline: thin solid darken($form-control-border-color, 25%);
+              }
             }
           }
         }

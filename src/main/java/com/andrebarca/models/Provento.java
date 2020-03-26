@@ -38,7 +38,7 @@ public class Provento extends Base {
 	private TipoProvento tipoProvento;
 
 	@ManyToOne
-	@JoinColumn(name = "ACAO_ID")
+	@JoinColumn(name = "PAPEL_ID")
 	@JsonIgnoreProperties({"operacoes"})
 	private Papel papel;
 

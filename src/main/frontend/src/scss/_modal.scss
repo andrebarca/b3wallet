@@ -15,12 +15,12 @@ Modal component styles
 
   @media(min-width: $medium-device) {
     border-radius: $form-control-border-radius;
-    width: 80%;
+    width: 85%;
     height: auto;
   }
 
   @media(min-width: $large-device) {
-    width: 50%;
+    width: 75%;
     height: auto;
   }
 

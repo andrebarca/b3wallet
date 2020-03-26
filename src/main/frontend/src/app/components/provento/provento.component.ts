@@ -38,7 +38,7 @@ export class ProventoComponent implements OnInit {
   list(): Object {
     let obj: Object = new Object();
     this.proventos.forEach(provento => {
-      let key = moment(provento.dataPagamento).format('MM/YYYY');
+      let key = moment(provento.dataEx).format('MM/YYYY');
       if (obj.hasOwnProperty(key)) {
         obj[key].items.push(provento);
         obj[key].total += provento.valor;

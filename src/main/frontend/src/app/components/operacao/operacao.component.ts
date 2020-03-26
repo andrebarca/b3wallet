@@ -99,7 +99,7 @@ export class OperacaoComponent implements OnInit {
     }
 
     getCustosOperacionais(): number {
-      let totalCustos: number = 0;
+      let totalCustos = 0;
       this.operacoes.forEach(op => {
         totalCustos += op.custoOperacao;
       });
