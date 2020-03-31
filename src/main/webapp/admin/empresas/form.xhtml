@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+    <title>B3WALLET</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+</h:head>
+<h:body>
+    <ui:composition template="/WEB-INF/templates/layout.xhtml">
+        <ui:define name="content">
+            <h:form styleClass="form">
+                <h2 class="form-title">#{empresaController.selected.nome}</h2>
+                <div class="form-control g-8">
+                    <h:inputText value="#{empresaController.selected.nome}" id="empresa_nome" required="true" />
+                    <h:outputLabel for="empresa_nome">Nome:</h:outputLabel>
+                </div>
+                <div class="form-control g-4">
+                    <h:inputText value="#{empresaController.selected.cnpj}" id="empresa_cnpj" required="true" />
+                    <h:outputLabel for="empresa_cnpj">CNPJ:</h:outputLabel>
+                </div>
+                <footer class="form-actions">
+                    <h:commandButton action="#{empresaController.index()}" id="voltarIndexEmpresa" value="voltar" class="btn" />
+                    <h:commandButton action="#{empresaController.save()}" id="editEmpresa" value="salvar" class="btn btn-primary" />
+                </footer>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</h:body>
+
+</html>

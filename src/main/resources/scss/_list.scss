@@ -1,0 +1,58 @@
+/*
+================================================================================
+List component styles
+==============================================================================
+*/
+
+.list {
+  $class-name: &;
+  display: flex;
+  flex: 1 0 100%;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  list-style-type: none;
+  overflow: hidden;
+  border-radius: $form-control-border-radius;
+  padding: 0;
+  border: 1px solid $list-border-color;
+
+  &-item {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1 0 calc(100% - #{$padding});
+    padding: $padding/2;
+    min-height: $list-height;
+    align-items: center;
+    background-color: $list-background-color;
+    transition: all .25s ease;
+
+    &:hover {
+      transition: all .25s ease;
+      background-color: $list-background-hover-color;
+    }
+
+    & + & {
+      border-top: 1px solid $list-border-color;
+    }
+
+    &-detail {
+      margin: $margin $margin $margin auto;
+      & > * {
+        margin: auto $margin;
+      }
+    }
+
+    &-block {
+      display: none;
+    }
+
+    &.selected {
+      background-color: $list-background-hover-color;
+    }
+
+    &.expanded &-block {
+      display: flex;
+      flex: 1 0 100%;
+    }
+  }
+}

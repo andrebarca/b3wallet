@@ -1,0 +1,327 @@
+
+@import "reset";
+@import "variables";
+@import "mixins";
+@import "nav";
+@import "list";
+@import "table";
+@import "form";
+@import "button";
+@import "modal";
+@import "message";
+/*
+================================================================================
+Tag styles
+==============================================================================
+*/
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+  color: #ffffee;
+  background: #000011;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+
+body {
+    background-color: $body-background;
+    overflow-y: scroll;
+}
+
+hr {
+  width: 100%;
+  height: 1px;
+  border-width: 0;
+  background: $border-dark-color;
+  margin: #{$margin} 0;
+}
+
+a {
+    cursor: pointer;
+}
+
+/*
+================================================================================
+Grid component styles
+==============================================================================
+*/
+
+@for $g from 1 through $grid-divisor {
+    .g-#{$g} {
+        $size: $g/$grid-divisor * 100%;
+        width: calc(#{$size} - #{$margin*2});
+    }
+}
+
+// small device
+@media only screen and (max-width: $small-device) {
+    @for $g from 1 through $grid-divisor {
+        .g-p-#{$g} {
+            $size: $g/$grid-divisor * 100%;
+            width: calc(#{$size} - #{$margin*2});
+        }
+    }
+}
+
+// medium device
+@media only screen and (min-width: $small-device) and (max-width: $medium-device) {
+    @for $g from 1 through $grid-divisor {
+        .g-m-#{$g} {
+            $size: $g/$grid-divisor * 100%;
+            width: calc(#{$size} - #{$margin*2});
+        }
+    }
+}
+
+// large device
+@media only screen and (min-width: $medium-device) {
+    @for $g from 1 through $grid-divisor {
+        .g-l-#{$g} {
+            $size: $g/$grid-divisor * 100%;
+            width: calc(#{$size} - #{$margin*2});
+        }
+    }
+}
+
+/*
+================================================================================
+Generic component styles
+==============================================================================
+*/
+.hidden {
+    display: none;
+    @each $size, $device in (s: $small-device, m: $medium-device, l: $large-device, xl: $xlarge-device) {
+      &-#{$size} {
+        @media only screen and (max-width: $device) {
+          display: none;
+        }
+      }
+    }
+}
+
+.title {
+    display: flex;
+    flex: 1 0 auto;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 1.5em;
+    margin: -#{$margin} -#{$margin} -2px -#{$margin};
+    padding: $padding;
+    width: 100%;
+    font-weight: normal;
+
+    &-text {
+      text-align: left;
+      padding: $padding 0;
+      flex: 1;
+    }
+
+    &-text-block {
+      flex: 1 0 100%;
+      padding: $padding;
+      text-align: center;
+    }
+
+    &-detail {
+      margin-left: auto;
+    }
+
+    &-detail-block, &-action {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 $margin/2;
+    }
+
+    &-detail-block {
+      flex: 1;
+      flex-wrap: wrap;
+      align-content: center;
+    }
+
+    &-action {
+        position: fixed;
+        bottom: $margin;
+        right: $margin;
+        width: $circle-size;
+        height: $circle-size;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 1.5em;
+        background-color: $light-background;
+        transition: all .2s ease-in-out;
+        
+        & > * {
+            &::before {
+                text-shadow: 3px 3px 10px $shadow-color-dark;
+            }
+        }
+
+        &:hover {
+          transform: scale(1.2);
+          transition: all .2s ease-in-out;
+          &::before {
+            text-shadow: 12px 6px 20px $shadow-color-dark;
+          }
+        }
+    }
+
+    @media(min-width: $medium-device) {
+      position: initial;
+      background: initial;
+      margin: 0 -#{$margin};
+      border-bottom: 0;
+
+      &-text-block {
+        padding: initial;
+        flex: initial;
+      }
+
+      &-detail-block {
+        flex: initial;
+        margin-left: auto;
+      }
+
+      &-action {
+        position: initial;
+      }
+    }
+}
+
+.text {
+  &-info {
+    color: $text-info-color;
+  }
+  
+  &-success {
+    color: $text-success-color;
+  }
+
+  &-warning {
+    color: $text-warning-color;
+  }
+
+  &-error {
+    color: $text-error-color;
+  }
+}
+
+a, .link {
+    cursor: pointer;
+    color: $link-color;
+    text-decoration: none;
+    transition: all .2s ease-in-out;
+
+    &:hover {
+        color: darken($link-color, 15%);
+        transition: all .2s ease-in-out;
+    }
+}
+
+.note {
+  display: flex;
+  flex: 1 0 auto;
+  padding: $padding;
+  margin: $margin;
+  align-items: center;
+  justify-content: center;
+  border: thin solid $border-color;
+  border-radius: $border-radius;
+  color: $dark-foreground;
+  background: $dark-background;
+}
+
+.circle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    width: $circle-size;
+    height: $circle-size;
+    background: inherit;
+    border: 1px solid $list-border-color;
+    font-size: 0.75em;
+}
+
+//.<alignment> { text-align: <alignment>; }
+@each $alignment in $text-alignment {
+    .#{$alignment} {
+        text-align: $alignment;
+    }
+}
+
+//.margin-<direction>-[1-10]
+@each $side in $directions {
+    @for $m from 1 through 10 {
+        .margin-#{$side}-#{$m} {
+            margin-#{$side}: $m * $margin;
+        }
+    }
+}
+
+/*
+================================================================================
+Container component styles
+==============================================================================
+*/
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    align-items: flex-start;
+    margin: 0;
+    max-width: 1200px;
+    min-height: calc(100vh - #{$nav-bar-height + $margin * 2});
+    border: 1px solid $border-color;
+    padding: $padding;
+    z-index: 1;
+
+    &::after {
+      content: ' ';
+      display: block;
+      width: 100%;
+      height: calc(#{$circle-size} + #{$margin});
+    }
+
+    &-login {
+      align-items: center;
+      align-content: center;
+
+      .form {
+        margin: auto;
+        max-width: 20em;
+        border-radius: $border-radius;
+        border: thin solid $border-color;
+
+        &-title {
+          text-align: center;
+        }
+
+        &-actions {
+          justify-content: center;
+        }
+      }
+    }
+
+    @media(min-width: $medium-device) {
+        margin: $margin auto;
+
+        &::after {
+          display: none;
+        }
+    }
+}
+
+.content {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1 1 auto;
+    margin: 0 $margin;
+    padding: $padding;
+    border-radius: $form-control-border-radius;
+    border: 1px solid $list-background-color;
+}

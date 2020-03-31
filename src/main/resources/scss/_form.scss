@@ -1,0 +1,246 @@
+/*
+================================================================================
+Form component styles
+==============================================================================
+*/
+.form {
+  $className: &;
+  display: flex;
+  flex-wrap: wrap;
+  flex: 1 1 auto;
+  margin: 0;
+  
+  fieldset {
+    display: inherit;
+    flex-wrap: inherit;
+    flex: inherit;
+    border: thin solid $form-control-border-color;
+    border-radius: $form-control-border-radius;
+    margin: $margin;
+
+    legend {
+      color: $form-control-color;
+      padding: #{$padding/2};
+      user-select: none;
+
+      * + * {
+        margin-left: #{$margin};
+      }
+    }
+  }
+
+  &-group {
+    display: inherit;
+    flex-wrap: inherit;
+    flex: 1 0 100%;
+    padding: $padding 0;
+    justify-content: space-between;
+    border-top: thin solid $form-control-border-color;
+  }
+
+
+  @at-root
+  &-control {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    border-radius: $form-control-border-radius;
+    margin: $margin;
+    font-size: 1rem;
+    color: $form-control-color;
+
+
+    input[type="number"] {
+      text-align: right;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="password"],
+    input[type="date"],
+    input[type="month"],
+    textarea,
+    select {
+        flex: 1 0 auto;
+        border-width: 0 0 1px 0;
+        border-color: darken($form-control-border-color, 25%);
+        background-color: transparent;
+        height: $form-control-height;
+        min-height: $form-control-height;
+        z-index: 1;
+        color: transparent;
+
+        @include disabled-status;
+
+        &:valid, &:focus {
+            color: $form-control-color;
+            outline: none;
+            & ~ label {
+              cursor: default;
+              font-size: 0.8rem;
+              transform: translateY(-175%);
+              transition: all .1s linear;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+            }
+          }
+
+        &:valid {
+          border-color: darken($form-control-border-color, 50%);
+        }
+
+        &:focus {
+          border-color: $form-control-border-color;
+        }
+
+        // angular invalid field
+        &.ng-touched.ng-dirty:invalid {
+          border-color: $form-color-invalid;
+        }
+     }
+
+     label {
+       user-select: none;
+       font-size: 1rem;
+       height: $form-control-height;
+       margin-left: 0;
+       transform: translateY(-75%);
+       transition: all .1s linear;
+       z-index: 0;
+     }
+
+    input[type="checkbox"] {
+      & ~ label::before {
+        border-radius: $form-control-border-radius;
+      }
+    }
+
+    input[type="radio"] {
+      & ~ label {
+
+        &::before {
+          border-radius: 50%;
+        }
+      }
+
+      &:checked ~ label {
+        cursor: default;
+      }
+    }
+
+    input[type="checkbox"], input[type="radio"] {
+      display: none;
+
+      & ~ label {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        height: initial;
+        transform: translateY(0);
+        margin-left: 0;
+
+        &::before {
+          content: ' ';
+          display: inline-block;
+          margin-right: $margin/2;
+          border: 2px solid $form-control-color;
+          box-sizing: border-box;
+          width: 1rem;
+          height: 1rem;
+        }
+      }
+
+      &:checked ~ label {
+        color: darken($form-control-color, 100%);
+        &::before {
+          background: darken($form-control-color, 100%);
+        }
+      }
+    }
+
+     textarea {
+         height: initial;
+         resize: vertical;
+    
+         & ~ label {
+            position: absolute;
+            top: $form-control-height;
+         }
+     }
+
+     //label + field inline
+     &.inline {
+       flex-direction: row;
+      //  align-items: center;
+       margin: 0 #{$margin};
+
+       & > * + * {
+         margin-left: #{$margin / 2};
+       }
+
+       input, textarea, select {
+         font-size: initial;
+         border-width: 0;
+         background-color: transparent;
+         &:valid, &:focus {
+           & ~ label {
+             font-size: initial;
+             transform: initial;
+           }
+         }
+       }
+
+       label {
+         height: initial;
+         transform: initial;
+         order: -1;
+       }
+     }
+  }
+  
+  @at-root  
+  .static-text {
+    display: inline-flex;
+    flex: 1 0 auto;
+    align-items: center;
+    height: $form-control-height;
+    min-height: $form-control-height;
+    color: initial;
+    
+    @each $k, $v in $horizontal-flex-alignment {
+      &.#{$k} {
+        justify-content: flex-#{$v};
+      }
+    }
+  }
+
+  &-title {
+    flex: 1 0 100%;
+    margin-top: 0;
+    padding: #{$padding*2}  #{$padding};
+    border-bottom-style: $form-control-border-style;
+    border-bottom-width: $form-control-border-width;
+    border-bottom-color: $form-control-border-color;
+  }
+
+
+  &-actions {
+    display: flex;
+    justify-content: flex-end;
+    flex: 1 0 100%;
+    padding: $padding;
+    * + * {
+      margin-left: $margin;
+    }
+  }
+
+  @media(min-width: $medium-device) {
+    &-group {
+      flex: inherit;
+      border-top: none;
+    }
+  }
+
+}
+

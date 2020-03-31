@@ -5,8 +5,7 @@
 
 <h:head>
     <title>B3Wallet</title>
-
-    <h:outputStylesheet name="styles.css" library="css" />
+    <link rel="stylesheet" href="/css/styles.css" />
 </h:head>
 
 <body>
@@ -15,7 +14,7 @@
             <ui:include src="/WEB-INF/templates/header.xhtml" />
         </ui:insert>
     </header>
-    <main id="content">
+    <main id="content" class="container">
         <ui:insert name="content" />
     </main>
     <footer id="footer">

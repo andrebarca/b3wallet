@@ -1,0 +1,118 @@
+//=========================================================================
+//Breakpoints
+//=========================================================================
+$small-device: 425px;
+$medium-device: 768px;
+$large-device: 1200px;
+$xlarge-device: 1280px;
+
+//=========================================================================
+//Generic component variables
+//=========================================================================
+$margin: 10px;
+$padding: 10px;
+$circle-size: 2rem;
+$border-radius: 3px;
+$disabled-opacity: 0.5;
+//=========================================================================
+//Pallete
+//=========================================================================
+$light-foreground: #efefef;
+$dark-foreground: #07040c;
+$light-background: #fcf9e1;
+$dark-background: #000000;
+$default-color: #cccccc;
+$primary-color: #41aa21;
+$secondary-color: #a200ff;
+
+//=========================================================================
+//Element colors
+//=========================================================================
+$body-background: $dark-foreground;
+$link-color: #ffffb1;
+$shadow-color-dark: #55555588;
+$shadow-color-light: #55555588;
+$border-color: #ececec;
+$border-dark-color: #3b3b3b;
+
+//=========================================================================
+//Text Colors
+//=========================================================================
+$text-info-color: #006eff;
+$text-success-color: #1c9e22;
+$text-warning-color: #ffae00;
+$text-error-color: #cc0000;
+//=========================================================================
+//Message Colors
+//=========================================================================
+$message-info-color: #ccccff;
+$message-success-color: #b8ffbb;
+$message-warning-color: #ffd54f;
+$message-error-color: #ff9999;
+
+//=========================================================================
+//Grid component variables
+//=========================================================================
+$grid-divisor: 12;
+//=========================================================================
+//Navbar component variables
+//=========================================================================
+$nav-background-color-1: $primary-color;
+$nav-background-color-2:$default-color;
+$nav-background: transparent;
+$nav-border-color: darken($nav-background-color-2, 5%);
+$nav-bar-height: 60px;
+$nav-search-height: 40px;
+$nav-item-color: #eeeeee;
+$nav-item-color-active: #ffdd1d;
+
+//=========================================================================
+//Form component variables
+//=========================================================================
+$form-control-border-color: $border-color;
+$form-control-border-width: thin;
+$form-control-border-style: solid;
+$form-control-border-radius: 0;
+$form-control-height: 28px;
+$form-control-padding: 10px;
+$form-control-color: $light-foreground;
+$form-control-background: $dark-background;
+$form-title-background: lighten($dark-background, 5%);
+$form-color-invalid: #ee3333;
+//=========================================================================
+//Button component variables
+//=========================================================================
+$btn-color: $default-color;
+$btn-background: $dark-background;
+$btn-color-primary: $primary-color;
+$btn-background-primary: $dark-background;
+
+//=========================================================================
+//List component variables
+//=========================================================================
+$list-background-color: $dark-background;
+$list-background-hover-color: $dark-background;
+$list-border-color: $form-control-border-color;
+$list-height: 50px;
+
+//=========================================================================
+//Table component variables
+//=========================================================================
+$col-control-background: #f8f8f8;
+$row-control-background: #ececec;
+
+//=========================================================================
+//Message component variables
+//=========================================================================
+
+//=========================================================================
+//Container component variables
+//=========================================================================
+$container-background-color: #fefefe;
+
+//=========================================================================
+//directions, margins, alignments variables
+//=========================================================================
+$text-alignment: (center, left, right, justify);
+$directions: (top, right, bottom, left);
+$horizontal-flex-alignment: ("left": start, "center": center, "right": end);

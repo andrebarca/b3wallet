@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+    <title>B3WALLET</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+</h:head>
+<h:body>
+    <ui:composition template="/WEB-INF/templates/layout.xhtml">
+        <ui:define name="header">
+            <h1>Empresas</h1>
+        </ui:define>
+        <ui:define name="content">
+            <h:dataTable value="#{empresaController.empresas}" var="e" styleClass="table" columnClasses="left,left,left,right">
+                <h:column headerClass="left">
+                    <f:facet name="header">Empresa</f:facet>
+                    #{e.nome}
+                </h:column>
+                <h:column headerClass="left">
+                    <f:facet name="header">Papel</f:facet>
+                    #{e.tipoPapel.descricao}
+                </h:column>
+                <h:column headerClass="left">
+                    <f:facet name="header">CNPJ</f:facet>
+                    #{e.cnpj}
+                </h:column>
+                <h:column headerClass="right">
+                    <h:form name="#{e.id}">
+                        <h:commandButton action="#{empresaController.edit(e.id)}" id="editEmpresa" value="edit" class="btn btn-primary" />
+                    </h:form>
+                </h:column>
+            </h:dataTable>
+        </ui:define>
+    </ui:composition>
+</h:body>
+
+</html>

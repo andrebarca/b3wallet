@@ -13,27 +13,15 @@
 </h:head>
 <h:body>
     <ui:composition template="/WEB-INF/templates/layout.xhtml">
+    <ui:define name="header">
+        <h1>B3Wallet</h1>
+    </ui:define>
     <ui:define name="content">
         <main>
-            <section>
-                <h:dataTable value="#{empresaController.empresas}" var="e">
-                    <h:column>
-                    <f:facet name="header">Empresa</f:facet>
-                    #{e.nome}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Papel</f:facet>
-                        #{e.tipoPapel.descricao}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">CNPJ</f:facet>
-                        #{e.cnpj}
-                    </h:column>
-                </h:dataTable>
-            </section>
-            <p>
-                <h:outputText value="#{empresaController.text}"/>
-            </p>
+            <h:outputLink value="/admin/empresas/index.xhtml">
+                Empresas
+            </h:outputLink>
+
         </main>
     </ui:define>
     </ui:composition>
