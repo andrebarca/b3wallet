@@ -16,25 +16,29 @@
             <h1>Empresas</h1>
         </ui:define>
         <ui:define name="content">
-            <h:dataTable value="#{empresaController.empresas}" var="e" styleClass="table" columnClasses="left,left,left,right">
-                <h:column headerClass="left">
-                    <f:facet name="header">Empresa</f:facet>
-                    #{e.nome}
-                </h:column>
-                <h:column headerClass="left">
-                    <f:facet name="header">Papel</f:facet>
-                    #{e.tipoPapel.descricao}
-                </h:column>
-                <h:column headerClass="left">
-                    <f:facet name="header">CNPJ</f:facet>
-                    #{e.cnpj}
-                </h:column>
-                <h:column headerClass="right">
-                    <h:form name="#{e.id}">
-                        <h:commandButton action="#{empresaController.edit(e.id)}" id="editEmpresa" value="edit" class="btn btn-primary" />
-                    </h:form>
-                </h:column>
-            </h:dataTable>
+            <h:form name="#{e.id}">
+                <h:dataTable value="#{empresaController.empresas}" var="e" styleClass="table" columnClasses="left,left,left,right">
+                    <h:column headerClass="left">
+                        <f:facet name="header">Empresa</f:facet>
+                        #{e.nome}
+                    </h:column>
+                    <h:column headerClass="left">
+                        <f:facet name="header">Papel</f:facet>
+                        #{e.tipoPapel.descricao}
+                    </h:column>
+                    <h:column headerClass="left">
+                        <f:facet name="header">CNPJ</f:facet>
+                        <h:outputText value="#{e.cnpj}" converter="cnpjConverter" />
+                    </h:column>
+                    <h:column headerClass="right">
+                        <f:facet name="header">
+                            <h:commandButton action="#{empresaController.add()}" id="newEmpresa" value="n" class="btn" />
+                        </f:facet>
+                        <h:commandButton action="#{empresaController.edit(e.id)}" id="editEmpresa" value="e" class="btn" />
+                        <h:commandButton action="#{empresaController.delete(e.id)}" id="deleteEmpresa" value="r" class="btn" />
+                    </h:column>
+                </h:dataTable>
+            </h:form>
         </ui:define>
     </ui:composition>
 </h:body>

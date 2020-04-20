@@ -6,18 +6,19 @@
 <h:head>
     <title>B3Wallet</title>
     <link rel="stylesheet" href="/css/styles.css" />
+    <script type="module" src="/js/b3wallet.js"></script>
 </h:head>
 
 <body>
-    <header id="header">
+    <header id="header" class="header">
         <ui:insert name="header">
             <ui:include src="/WEB-INF/templates/header.xhtml" />
         </ui:insert>
     </header>
-    <main id="content" class="container">
+    <main id="content" class="main">
         <ui:insert name="content" />
     </main>
-    <footer id="footer">
+    <footer id="footer" class="footer">
         <ui:insert name="footer">
             <ui:include src="/WEB-INF/templates/footer.xhtml" />
         </ui:insert>

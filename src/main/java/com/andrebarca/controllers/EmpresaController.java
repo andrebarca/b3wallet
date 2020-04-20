@@ -37,7 +37,13 @@ public class EmpresaController implements Serializable {
         System.out.println("Empresa id: " + this.selected.getId());
         System.out.println("Empresa nome: " + this.selected.getNome());
         System.out.println("Empresa CNPJ: " + this.selected.getCnpj());
+        this.empresaRepository.save(this.selected);
         return "index?faces-redirect=true";
+    }
+
+    public String add() {
+        this.selected = new Empresa();
+        return "form?faces-redirect=true";
     }
 
     public String edit(long id) {
@@ -45,4 +51,8 @@ public class EmpresaController implements Serializable {
         this.selected = this.empresaRepository.findById(id).isPresent() ? this.empresaRepository.findById(id).get() : null;
         return "form?faces-redirect=true";
     }    
+
+    public void delete(long id) {
+        System.out.println("Delete Empresa id: " + id);
+    }
 }
