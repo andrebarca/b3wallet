@@ -31,11 +31,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class OperacaoService {
 
 	@Autowired
-	OperacaoRepository operacaoRepository;
+	OperacaoRepository repository;
 
 	@RequestMapping(value = "/api/operacoes/save", method = RequestMethod.POST)
 	public ResponseEntity<?> save(@RequestBody Operacao operacao) throws JsonProcessingException {
-		Operacao savedObj = operacaoRepository.save(operacao);
+		Operacao savedObj = repository.save(operacao);
 		return new ResponseEntity<>(savedObj, HttpStatus.CREATED);
 	}
 
@@ -43,7 +43,7 @@ public class OperacaoService {
 	public ResponseEntity<?> delete(@PathVariable long id) {
 		boolean removed = false;
 		try {
-			operacaoRepository.deleteById(id);
+			repository.deleteById(id);
 			removed = true;
 		} catch (Exception e) {
 			return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
@@ -51,9 +51,9 @@ public class OperacaoService {
 		return new ResponseEntity<>(removed, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/api/operacoes", produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/api/operacoes", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> list() {
-		Iterable<Operacao> operacoes = this.operacaoRepository.findAll(Sort.by(Direction.ASC, "papel.codigo")
+		Iterable<Operacao> operacoes = this.repository.findAll(Sort.by(Direction.ASC, "papel.codigo")
 				.and(Sort.by(Direction.ASC, "dataOperacao")).and(Sort.by(Direction.ASC, "tipoOperacao")));
 		return new ResponseEntity<>(operacoes, HttpStatus.OK);
 	}
@@ -68,7 +68,7 @@ public class OperacaoService {
 		SimpleDateFormat valueFormat = new SimpleDateFormat("yyyy-MM");
 		SimpleDateFormat descriptionFormat = new SimpleDateFormat("MM/yyyy");
 		Set<Map<String, String>> dateList = new HashSet<>();
-		this.operacaoRepository.listAllDataOperacao().forEach(date -> {
+		this.repository.listAllDataOperacao().forEach(date -> {
 			Map<String, String> dateMap = new HashMap<String, String>();
 			dateMap.put("value", valueFormat.format(date));
 			dateMap.put("description", descriptionFormat.format(date));

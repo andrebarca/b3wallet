@@ -23,17 +23,17 @@ import com.andrebarca.repositories.PapelRepository;
 public class PapelService {
     
     @Autowired
-    PapelRepository papelRepository;
+    PapelRepository repository;
     
     @RequestMapping(value = "/api/papeis/save", method = RequestMethod.POST)
     public ResponseEntity<?> save(@RequestBody Papel papel) {
-        Papel savedObj = this.papelRepository.save(papel);
+        Papel savedObj = this.repository.save(papel);
         return new ResponseEntity<>(savedObj, HttpStatus.CREATED);
     }
 
     @RequestMapping(value = "/api/papeis", method = RequestMethod.GET,  produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> list() {
-        Iterable<Papel> papeis = this.papelRepository.findAll(Sort.by(Direction.ASC, "codigo"));
+        Iterable<Papel> papeis = this.repository.findAll(Sort.by(Direction.ASC, "codigo"));
         return new ResponseEntity<>(papeis, HttpStatus.OK);
     }
 }

@@ -24,12 +24,13 @@ import com.andrebarca.models.Operacao;
 @Repository
 public interface OperacaoRepository extends CrudRepository<Operacao, Long>{
 
-    @Modifying
-    @Query("delete from Operacao o where o.id = ?1")
-    void deleteById(Long id);
-
+    
     List<Operacao> findAll(Sort sort);
     
     @Query("select dataOperacao from Operacao")
     List<Date> listAllDataOperacao();
+    
+    @Modifying
+    @Query("delete from Operacao o where o.id = ?1")
+    void deleteById(Long id);
 }

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html" 
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+<h:body>
+    <ui:composition template="/WEB-INF/templates/layout.xhtml">
+        <ui:define name="header">
+            <h1>Notas de corretagem</h1>
+        </ui:define>
+        <ui:define name="content">
+            <h:form name="notaCorretagemForm">
+                <div class="form-control g-9">
+                    <p:outputLabel for="find">Busca:</p:outputLabel>
+                    <p:inputText bind="#{findTerm}" id="find" autocomplete="off" required="false" />
+                </div>
+                <h:commandButton value="search" action="#{notaCorretagemController.find(findTerm.value)}" />
+                <h:outputText value="termo: #{findTerm.value}" />
+                <h:dataTable value="#{notaCorretagemController.list()}" var="n" styleClass="table" columnClasses="left,left,right,right,right">
+                    <h:column headerClass="left">
+                        <f:facet name="header">Número</f:facet>
+                        #{n.numero}
+                    </h:column>
+                    <h:column headerClass="left">
+                        <f:facet name="header">Data</f:facet>
+                        <h:outputText value="#{n.dataPregao}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:outputText>
+                    </h:column>
+                    <h:column headerClass="right">
+                        <f:facet name="header">Taxas</f:facet>
+                        <h:outputText value="#{n.totalTaxas}">
+                            <f:convertNumber type="currency" />
+                        </h:outputText>
+                    </h:column>
+                    <h:column headerClass="right">
+                        <f:facet name="header">Total</f:facet>
+                        <h:outputText value="#{n.totalNota}">
+                            <f:convertNumber type="currency" />
+                        </h:outputText>
+                    </h:column>
+                    <h:column headerClass="right">
+                        <f:facet name="header">
+                            <h:commandButton action="#{notaCorretagemController.add()}" id="new" value="n" class="btn" />
+                        </f:facet>
+                        <h:commandButton action="#{notaCorretagemController.edit(n.id)}" id="edit" value="e" class="btn" />
+                        <h:commandButton action="#{notaCorretagemController.delete(n.id)}" id="delete" value="r" class="btn" />
+                    </h:column>
+                </h:dataTable>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</h:body>
+
+</html>

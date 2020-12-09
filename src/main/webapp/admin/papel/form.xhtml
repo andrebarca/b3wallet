@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>B3WALLET</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport"
+            content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    </h:head>
+    <h:body>
+        <ui:composition template="/WEB-INF/templates/layout.xhtml">
+            <ui:define name="content">
+                <h:form styleClass="form">
+                    <h2 class="form-title">#{papelController.selected.codigo} - #{papelController.selected.empresa.nome}</h2>
+                    <div class="form-control g-3">
+                        <p:outputLabel for="papel_codigo">Codigo:</p:outputLabel>
+                        <p:inputText value="#{papelController.selected.codigo}" id="papel_codigo" autocomplete="off" required="true" />
+                    </div>
+                    <div class="form-control g-9">
+                        <p:outputLabel for="papel_empresa">Empresa:</p:outputLabel>
+                        <p:selectOneMenu id="papel_empresa" value="#{papelController.selected.empresa}">
+                            <f:selectItems value="#{empresaController.list()}" var="e" itemLabel="#{e.nome}" itemValue="#{e}" />
+                        </p:selectOneMenu>
+                    </div>
+                    <footer class="form-actions">
+                        <h:commandButton onclick="history.back()" id="voltarIndexPapel" type="button" value="voltar" class="btn" />
+                        <h:commandButton action="#{papelController.save()}" id="editPapel" value="salvar" class="btn btn-primary" />
+                    </footer>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

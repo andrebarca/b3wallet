@@ -1,10 +1,13 @@
 package com.andrebarca.models;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Temporal;
@@ -15,9 +18,11 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 @Entity
+@NamedEntityGraph(name = "NotaCorretagem.operacoes", attributeNodes = @NamedAttributeNode("operacoes"))
 public class NotaCorretagem extends Base {
 
     public NotaCorretagem() {
+        this.operacoes = new HashSet<Operacao>();
 
     }
 
@@ -113,5 +118,13 @@ public class NotaCorretagem extends Base {
 
     public Double getTotalTaxas() {
         return this.custosOperacionais + this.irrf;
+    }
+
+    public Double getTotalNota() {
+        Double total = this.custosOperacionais + this.irrf;
+        for (Operacao op: this.operacoes) {
+            total += op.getTipoOperacao() == TipoOperacao.COMPRA ? op.getTotalOperacao() * -1 : op.getTotalOperacao();
+        }
+        return total;
     }
 }

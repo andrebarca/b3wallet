@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>B3WALLET - NOTA DE CORRETAGEM</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+</h:head>
+<h:body>
+    <ui:composition template="/WEB-INF/templates/layout.xhtml">
+        <ui:define name="content">
+            <h:form id="formNotaCorretagem" styleClass="form">
+                <h2 class="form-title">Nota de Corretagem</h2>
+                <div class="row">
+                    <div class="form-control g-3">
+                        <p:outputLabel for="nota_numero">Número da nota</p:outputLabel>
+                        <p:inputNumber value="#{notaCorretagemController.selected.numero}" id="nota_numero" autocomplete="off"
+                            decimalPlaces="0" thousandSeparator="" required="true" />
+                    </div>
+    
+                    <div class="form-control g-3">
+                        <p:outputLabel for="nota_data_pregao">Data do pregão</p:outputLabel>
+                        <p:calendar value="#{notaCorretagemController.selected.dataPregao}" pattern="dd/MM/yyyy" mask="true" id="nota_data_pregao" required="true" />
+                    </div>
+    
+                    <div class="form-control g-3">
+                        <p:outputLabel for="nota_irrf">IRRF</p:outputLabel>
+                        <p:inputNumber value="#{notaCorretagemController.selected.irrf}" id="nota_irrf"
+                        decimalPlaces="2" symbol="R$ " required="true" />
+                    </div>
+    
+                    <div class="form-control g-3">
+                        <p:outputLabel for="nota_custos_operacionais">Custos operacionais</p:outputLabel>
+                        <p:inputNumber value="#{notaCorretagemController.selected.custosOperacionais}" id="nota_custos_operacionais"
+                        decimalPlaces="2" symbol="R$ " required="true" />
+                    </div>
+                </div>
+                <footer class="form-actions">
+                    <p:commandButton onclick="history.back()" id="voltarIndexNotaCorretagem" value="voltar"
+                        styleClass="btn" />
+                    <p:commandButton action="#{notaCorretagemController.save()}" id="editPapel" value="salvar"
+                        styleClass="btn btn-primary" />
+                </footer>
+            </h:form>
+            <h:form id="formOperacoes" styleClass="form">
+                <!-- operacoes -->
+                <fieldset class="row">
+                    <legend>Operações</legend>
+                    <div class="row">
+                        <div class="form-control g-3">
+                            <p:outputLabel for="operacao_tipo">Tipo da operação</p:outputLabel>
+                            <p:selectOneButton id="operacao_tipo" value="#{notaCorretagemController.tipoOperacao}" unselectable="false">
+                                <f:selectItem itemLabel="Compra" itemValue="COMPRA" />
+                                <f:selectItem itemLabel="Venda" itemValue="VENDA" />
+                            </p:selectOneButton>
+                        </div>
+                
+                        <div class="form-control g-3">
+                            <p:outputLabel for="operacao_codigo">Código</p:outputLabel>
+                            <p:autoComplete id="operacao_codigo" value="#{notaCorretagemController.codigo}"
+                                completeMethod="#{papelRepository.findByCodigoContainingIgnoreCase}" var="papel"
+                                itemLabel="#{papel.codigo}" itemValue="#{papel.codigo}" />
+                
+                        </div>
+                
+                        <div class="form-control g-2">
+                            <p:outputLabel for="operacao_quantidade">Quantidade</p:outputLabel>
+                            <p:inputNumber id="operacao_quantidade" value="#{notaCorretagemController.quantidade}" decimalPlaces="0" />
+                        </div>
+                
+                        <div class="form-control g-2">
+                            <p:outputLabel for="operacao_valor">Preço</p:outputLabel>
+                            <p:inputNumber id="operacao_valor" value="#{notaCorretagemController.valor}" decimalPlaces="2" symbol="R$ " />
+                        </div>
+                
+                        <div class="form-control g-2">
+                            <p:commandButton value="adicionar" id="operacao_dicionar" update="formOperacoes"
+                                action="#{notaCorretagemController.addItem()}" styleClass="btn btn-primary" />
+                        </div>
+                    </div>
+                </fieldset>
+                <hr class="separator" />
+                <p:dataTable id="notaCorretagem_itens" var="operacao" value="#{notaCorretagemController.selected.operacoes}"
+                    styleClass="table">
+                    <p:column headerText="código" styleClass="left">
+                        <h:outputText value="#{operacao.papel.codigo}" />
+                    </p:column>
+                    <p:column headerText="Operação" styleClass="left">
+                        <h:outputText value="#{operacao.tipoOperacao}" />
+                    </p:column>
+                    <p:column headerText="Quantidade" styleClass="right">
+                        <h:outputText value="#{operacao.quantidade}" />
+                    </p:column>
+                    <p:column headerText="Preço" styleClass="right">
+                        <h:outputText value="#{operacao.valor}">
+                            <f:convertNumber minFractionDigits="2" type="currency" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column headerText="Total" styleClass="right">
+                        <h:outputText value="#{operacao.totalOperacao}">
+                            <f:convertNumber minFractionDigits="2" type="currency" />
+                        </h:outputText>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</h:body>
+
+</html>

@@ -3,6 +3,7 @@
     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html
     xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:p="http://primefaces.org/ui">
@@ -18,13 +19,20 @@
             <ui:define name="content">
                 <h:form styleClass="form">
                     <h2 class="form-title">#{empresaController.selected.nome}</h2>
-                    <div class="form-control g-8">
-                        <h:inputText value="#{empresaController.selected.nome}" id="empresa_nome" autocomplete="off" required="true" />
-                        <h:outputLabel for="empresa_nome">Nome:</h:outputLabel>
+                    <div class="form-control g-6">
+                        <p:outputLabel for="empresa_nome">Nome:</p:outputLabel>
+                        <p:inputText value="#{empresaController.selected.nome}" id="empresa_nome" autocomplete="off" required="true" />
                     </div>
-                    <div class="form-control g-4">
-                        <p:inputMask value="#{empresaController.selected.cnpj}" id="empresa_cnpj" mask="99.999.999/9999-99" converter="cnpjConverter" required="true" />
+                    <div class="form-control g-3">
                         <p:outputLabel for="empresa_cnpj">CNPJ:</p:outputLabel>
+                        <p:inputMask value="#{empresaController.selected.cnpj}" id="empresa_cnpj" mask="99.999.999/9999-99" converter="cnpjConverter" required="true" />
+                    </div>
+                    <div class="form-control g-3">
+                        <p:outputLabel for="empresa_tipo">Tipo</p:outputLabel>
+                        <p:selectOneMenu id="empresa_tipo" value="#{empresaController.selected.tipoPapel}">
+                            <f:selectItem itemLabel="Ação" itemValue="ACAO"/>
+                            <f:selectItem itemLabel="Fundo imobiliário" itemValue="FUNDO_INVESTIMENTO_IMOBILIARIO"/>
+                        </p:selectOneMenu>
                     </div>
                     <footer class="form-actions">
                         <h:commandButton onclick="history.back()" id="voltarIndexEmpresa" type="button" value="voltar" class="btn" />

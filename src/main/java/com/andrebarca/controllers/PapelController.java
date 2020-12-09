@@ -1,22 +1,23 @@
 package com.andrebarca.controllers;
 
-import com.andrebarca.models.Empresa;
-import com.andrebarca.repositories.EmpresaRepository;
+import com.andrebarca.models.Papel;
+import com.andrebarca.repositories.PapelRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.context.annotation.SessionScope;
 
-@Component
+
+@Controller
 @SessionScope
-public class EmpresaController implements BaseController {
+public class PapelController implements BaseController {
 
     private static final long serialVersionUID = 1L;
 
-    private Empresa selected;
+    private Papel selected;
 
     @Autowired
-    private EmpresaRepository repository;
+    private PapelRepository repository;
 
     @Override
     public String index() {
@@ -31,7 +32,7 @@ public class EmpresaController implements BaseController {
 
     @Override
     public String add() {
-        this.selected = new Empresa();
+        this.selected = new Papel();
         return "form?faces-redirect=true";
     }
 
@@ -39,7 +40,7 @@ public class EmpresaController implements BaseController {
     public String edit(long id) {
         this.selected = this.repository.findById(id).isPresent() ? this.repository.findById(id).get() : null;
         return "form?faces-redirect=true";
-    }    
+    }
 
     @Override
     public void delete(long id) {
@@ -47,26 +48,26 @@ public class EmpresaController implements BaseController {
     }
 
     @Override
-    public Iterable<Empresa> list() {
+    public Iterable<Papel> list() {
         return this.repository.findAll();
     }
 
     @Override
-    public Iterable<Empresa> find(String query) {
-        return this.repository.findAll();
+    public Iterable<Papel> find(String query) {
+        return this.repository.find(query);
     }
 
     /**
      * @return the selected
      */
-    public Empresa getSelected() {
+    public Papel getSelected() {
         return selected;
     }
 
     /**
      * @param selected the selected to set
      */
-    public void setSelected(Empresa selected) {
+    public void setSelected(Papel selected) {
         this.selected = selected;
     }
 }

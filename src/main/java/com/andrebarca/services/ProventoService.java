@@ -6,6 +6,8 @@
 package com.andrebarca.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -28,11 +30,11 @@ import com.andrebarca.repositories.ProventoRepository;
 public class ProventoService {
 
     @Autowired
-    ProventoRepository proventoRepository;
+    ProventoRepository repository;
 
     @RequestMapping(value = "/api/proventos/save", method = RequestMethod.POST)
     public ResponseEntity<?> save(@RequestBody Provento provento) {
-        Provento savedObj = proventoRepository.save(provento);
+        Provento savedObj = repository.save(provento);
         return new ResponseEntity<>(savedObj, HttpStatus.CREATED);
     }
 
@@ -40,17 +42,18 @@ public class ProventoService {
     public ResponseEntity<?> delete(@PathVariable long id) {
         boolean removed = false;
         try {
-            proventoRepository.deleteById(id);
+            repository.deleteById(id);
             removed = true;
         } catch (Exception e) {
             System.out.println("could not delete obj id: " + id);
         }
         return new ResponseEntity<>(removed, HttpStatus.OK);
     }
+    
 
     @RequestMapping(value = "/api/proventos", method = RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> list() {
-        Iterable<Provento> proventos = this.proventoRepository.findAll();
+        Iterable<Provento> proventos = this.repository.findAll(Sort.by(Direction.DESC, "dataPagamento"));
         return new ResponseEntity<>(proventos, HttpStatus.OK);
     }
     

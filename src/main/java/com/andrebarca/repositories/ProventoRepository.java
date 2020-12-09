@@ -5,11 +5,12 @@
  */
 package com.andrebarca.repositories;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
-
+import java.util.List;
 import com.andrebarca.models.Provento;
 
 /**
@@ -23,5 +24,7 @@ public interface ProventoRepository extends CrudRepository<Provento, Long>{
   @Modifying
   @Query("delete from Provento d where d.id = ?1")
   void deleteById(Long id);
+
+  List<Provento> findAll(Sort sort);  
 
 }

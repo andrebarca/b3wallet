@@ -29,17 +29,17 @@ import com.andrebarca.repositories.EmpresaRepository;
 public class EmpresaService {
     
     @Autowired
-    EmpresaRepository empresaRepository;
+    EmpresaRepository repository;
     
     @RequestMapping(value = "/api/empresas/save", method = RequestMethod.POST)
     public ResponseEntity<?> save(@RequestBody Empresa empresa) {
-        Empresa savedObj = this. empresaRepository.save( empresa);
+        Empresa savedObj = this. repository.save( empresa);
         return new ResponseEntity<>(savedObj, HttpStatus.CREATED);
     }
 
     @RequestMapping(value = "/api/empresas", method = RequestMethod.GET,  produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> list() {
-        Iterable<Empresa> empresas = this.empresaRepository.findAll(Sort.by(Direction.ASC, "nome"));
+        Iterable<Empresa> empresas = this.repository.findAll(Sort.by(Direction.ASC, "nome"));
         return new ResponseEntity<>(empresas, HttpStatus.OK);
     }
 

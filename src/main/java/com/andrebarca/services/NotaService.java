@@ -22,11 +22,11 @@ import com.andrebarca.repositories.NotaRepository;
 public class NotaService {
     
     @Autowired
-    NotaRepository notaRepository;
+    NotaRepository repository;
     
     @RequestMapping(value = "/api/notas/save", method = RequestMethod.POST)
     public ResponseEntity<?> save(@RequestBody Nota nota) {
-        Nota savedObj = notaRepository.save(nota);
+        Nota savedObj = repository.save(nota);
         return new ResponseEntity<>(savedObj, HttpStatus.CREATED);
     }
     
@@ -34,7 +34,7 @@ public class NotaService {
     public ResponseEntity<?> delete(@PathVariable long id) {
         boolean removed = false;
         try {
-            notaRepository.deleteById(id);
+            repository.deleteById(id);
             removed = true;
         } catch (Exception e) {
             System.out.println("could not delete obj id: " + id);
@@ -44,7 +44,7 @@ public class NotaService {
 
     @RequestMapping(value = "/api/notas", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> list() {
-        Iterable<Nota> notas = this.notaRepository.findAll();
+        Iterable<Nota> notas = this.repository.findAll();
         return new ResponseEntity<>(notas, HttpStatus.OK);
     }    
 }

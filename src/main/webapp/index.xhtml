@@ -18,10 +18,26 @@
     </ui:define>
     <ui:define name="content">
         <main>
-            <h:outputLink value="/admin/empresas/index.xhtml">
-                Empresas
-            </h:outputLink>
-
+            <ul class="list">
+                <li class="list-title">
+                    Itens
+                </li>
+                <li class="list-item">
+                    <h:outputLink value="/admin/empresa/index.xhtml">
+                        Empresas
+                    </h:outputLink>
+                </li>
+                <li class="list-item">
+                    <h:outputLink value="/admin/papel/index.xhtml">
+                        Papeis
+                    </h:outputLink>
+                </li>
+                <li class="list-item">
+                    <h:outputLink value="/admin/nota-corretagem/index.xhtml">
+                        Notas de corretagem
+                    </h:outputLink>
+                </li>
+            </ul>
         </main>
     </ui:define>
     </ui:composition>

@@ -25,11 +25,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class NotaCorretagemService {
 
 	@Autowired
-	NotaCorretagemRepository notaCorretagemRepository;
+	NotaCorretagemRepository repository;
 
 	@RequestMapping(value = "/api/notas-de-corretagem/save", method = RequestMethod.POST)
 	public ResponseEntity<?> save(@RequestBody NotaCorretagem notaCorretagem) throws JsonProcessingException {
-		NotaCorretagem savedObj = notaCorretagemRepository.save(notaCorretagem);
+		NotaCorretagem savedObj = repository.save(notaCorretagem);
 		return new ResponseEntity<>(savedObj, HttpStatus.CREATED);
 	}
 
@@ -37,7 +37,7 @@ public class NotaCorretagemService {
 	public ResponseEntity<?> delete(@PathVariable long id) {
 		boolean removed = false;
 		try {
-			notaCorretagemRepository.deleteById(id);
+			repository.deleteById(id);
 			removed = true;
 		} catch (Exception e) {
 			return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
@@ -47,13 +47,13 @@ public class NotaCorretagemService {
 
 	@RequestMapping(value = "/api/notas-de-corretagem/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> get(@PathVariable long id) {
-		NotaCorretagem notaCorretagem = this.notaCorretagemRepository.getById(id);
+		NotaCorretagem notaCorretagem = this.repository.getById(id);
 		return new ResponseEntity<>(notaCorretagem, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/api/notas-de-corretagem", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> list() {
-		Iterable<NotaCorretagem> notasCorretagem = this.notaCorretagemRepository.findAll();
+		Iterable<NotaCorretagem> notasCorretagem = this.repository.findAll();
 		notasCorretagem.forEach(nota -> {
 			System.out.println(nota.getTotalTaxas());
 			double taxas = nota.getTotalTaxas();

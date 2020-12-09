@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html" 
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+    <title>B3WALLET</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+</h:head>
+<h:body>
+    <ui:composition template="/WEB-INF/templates/layout.xhtml">
+        <ui:define name="header">
+            <h1>Papeis</h1>
+        </ui:define>
+        <ui:define name="content">
+            <h:form name="papelForm">
+                <h:dataTable value="#{papelController.list()}" var="p" styleClass="table"
+                    columnClasses="left,left,right">
+                    <h:column a:title="Papel" headerClass="left">
+                        <f:facet name="header">Papel</f:facet>
+                        #{p.codigo}
+                    </h:column>
+                    <h:column a:title="Empresa" headerClass="left">
+                        <f:facet name="header">Empresa</f:facet>
+                        #{p.empresa.nome}
+                    </h:column>
+                    <h:column headerClass="right">
+                        <f:facet name="header">
+                            <h:commandButton action="#{papelController.add()}" id="new" value="n"
+                                class="btn" />
+                        </f:facet>
+                        <h:commandButton action="#{papelController.edit(p.id)}" id="edit" value="e"
+                            class="btn" />
+                        <h:commandButton action="#{papelController.delete(e.id)}" id="delete" value="r"
+                            class="btn" />
+                    </h:column>
+                </h:dataTable>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</h:body>
+
+</html>

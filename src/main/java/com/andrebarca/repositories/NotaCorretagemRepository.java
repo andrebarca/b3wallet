@@ -9,8 +9,10 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.EntityGraph.EntityGraphType;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -28,11 +30,14 @@ public interface NotaCorretagemRepository extends CrudRepository<NotaCorretagem,
     @Query("delete from NotaCorretagem nc where nc.id = ?1")
     void deleteById(Long id);
 
+    @EntityGraph(value = "NotaCorretagem.operacoes", type = EntityGraphType.LOAD)
     @Query("select nc from NotaCorretagem nc where nc.id = ?1")
     NotaCorretagem getById(Long id);
-
+    
+    List<NotaCorretagem> findByOrderByDataPregaoDesc();
+    
     List<NotaCorretagem> findAll(Sort sort);    
     
-    @Query("select dataPregao from NotaCorretagem")
+    @Query("select dataPregao from NotaCorretagem nc order by nc.dataPregao desc")
     List<Date> listAllDataNotaCorretagem();
 }
