@@ -22,7 +22,7 @@
                 <h:dataTable value="#{notaCorretagemController.list()}" var="n" styleClass="table" columnClasses="left,left,right,right,right">
                     <h:column headerClass="left">
                         <f:facet name="header">Número</f:facet>
-                        #{n.numero}
+                        <h:outputText value="#{n.numero}" />
                     </h:column>
                     <h:column headerClass="left">
                         <f:facet name="header">Data</f:facet>
@@ -46,8 +46,8 @@
                         <f:facet name="header">
                             <h:commandButton action="#{notaCorretagemController.add()}" id="new" value="n" class="btn" />
                         </f:facet>
-                        <h:commandButton action="#{notaCorretagemController.edit(n.id)}" id="edit" value="e" class="btn" />
-                        <h:commandButton action="#{notaCorretagemController.delete(n.id)}" id="delete" value="r" class="btn" />
+                        <h:commandButton action="#{notaCorretagemController.edit(n.id)}" value="e" class="btn" />
+                        <h:commandButton action="#{notaCorretagemController.delete(n.id)}" value="r" class="btn" />
                     </h:column>
                 </h:dataTable>
             </h:form>

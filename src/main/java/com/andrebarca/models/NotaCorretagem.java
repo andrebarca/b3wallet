@@ -77,6 +77,10 @@ public class NotaCorretagem extends Base {
         this.operacoes.add(operacao);
     }
 
+    public void deleteOperacao(Operacao operacao) {
+        this.operacoes.remove(operacao);
+    }
+
     public Set<Operacao> getOperacoes() {
         return operacoes;
     }

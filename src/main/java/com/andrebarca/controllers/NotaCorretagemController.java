@@ -31,17 +31,17 @@ public class NotaCorretagemController implements BaseController {
     private NotaCorretagem selected;
 
     // item values
-    private String codigo;
+    private Papel papel;
     private String tipoOperacao = TipoOperacao.COMPRA.getTipo();
     private Double valor = 0.0;
     private int quantidade = 0;
 
-    public String getCodigo() {
-        return codigo;
+    public Papel getPapel() {
+        return papel;
     }
 
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
+    public void setPapel(Papel papel) {
+        this.papel = papel;
     }
 
     public String getTipoOperacao() {
@@ -103,26 +103,28 @@ public class NotaCorretagemController implements BaseController {
     }
 
     public void addItem() {
-        System.out.println("codigo.......:" + this.getCodigo());
+        System.out.println("codigo.......:" + this.papel.getCodigo());
         System.out.println("tipo operacao:" + this.getTipoOperacao());
         System.out.println("preço........:" + this.getValor());
         System.out.println("quantidade...:" + this.getQuantidade());
-        
-        Papel papel = papelRepository.findByCodigo(this.codigo);
-        
+
         TipoOperacao tipoOperacao = TipoOperacao.valueOf(this.getTipoOperacao());
-        
         Operacao operacao = new Operacao();
         operacao.setPapel(papel);
         operacao.setTipoOperacao(tipoOperacao);
         operacao.setQuantidade(this.getQuantidade());
         operacao.setValor(this.getValor());
-        this.selected.addOperacao(operacao);
+        this.getSelected().addOperacao(operacao);
         this.resetItemForm();
     }
 
+    public void deleteItem(Operacao operacao) {
+        System.out.println(operacao);
+        this.getSelected().deleteOperacao(operacao);
+    }
+
     public void resetItemForm() {
-        this.setCodigo(null);
+        this.setPapel(null);
         this.setTipoOperacao("COMPRA");
         this.setQuantidade(0);
         this.setValor(0.0);

@@ -25,7 +25,7 @@
                     </div>
                     <div class="form-control g-3">
                         <p:outputLabel for="empresa_cnpj">CNPJ:</p:outputLabel>
-                        <p:inputMask value="#{empresaController.selected.cnpj}" id="empresa_cnpj" mask="99.999.999/9999-99" converter="cnpjConverter" required="true" />
+                        <p:inputMask value="#{empresaController.selected.cnpj}" id="empresa_cnpj" mask="99.999.999/9999-99" converter="#{cnpjConverter}" required="true" />
                     </div>
                     <div class="form-control g-3">
                         <p:outputLabel for="empresa_tipo">Tipo</p:outputLabel>

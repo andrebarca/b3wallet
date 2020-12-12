@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.andrebarca.repositories;
 
 import java.util.List;
@@ -29,9 +24,9 @@ public interface PapelRepository extends CrudRepository<Papel, Long> {
     List<Papel> find(@Param("codigo") String query);
 
     List<Papel> findByCodigoContainingIgnoreCase(String codigo);
-
+    
     Papel findByCodigo(String codigo);
-
+    
     @Modifying
     @Query("delete from Papel p where p.id = ?1")
     void deleteById(Long id);

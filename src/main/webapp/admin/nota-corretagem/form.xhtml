@@ -61,9 +61,9 @@
                 
                         <div class="form-control g-3">
                             <p:outputLabel for="operacao_codigo">Código</p:outputLabel>
-                            <p:autoComplete id="operacao_codigo" value="#{notaCorretagemController.codigo}"
+                            <p:autoComplete id="operacao_codigo" value="#{notaCorretagemController.papel}"
                                 completeMethod="#{papelRepository.findByCodigoContainingIgnoreCase}" var="papel"
-                                itemLabel="#{papel.codigo}" itemValue="#{papel.codigo}" />
+                                itemLabel="#{papel.codigo}" itemValue="#{papel}" converter="#{papelConverter}" />
                 
                         </div>
                 
@@ -84,28 +84,36 @@
                     </div>
                 </fieldset>
                 <hr class="separator" />
-                <p:dataTable id="notaCorretagem_itens" var="operacao" value="#{notaCorretagemController.selected.operacoes}"
-                    styleClass="table">
-                    <p:column headerText="código" styleClass="left">
+                <h:dataTable id="notaCorretagem_itens" var="operacao" value="#{notaCorretagemController.selected.operacoes}"
+                    styleClass="table" columnClasses="left,left,right,right,right,right">
+                    <h:column headerClass="left">
+                        <f:facet name="header">Código</f:facet>
                         <h:outputText value="#{operacao.papel.codigo}" />
-                    </p:column>
-                    <p:column headerText="Operação" styleClass="left">
+                    </h:column>
+                    <h:column headerClass="left">
+                        <f:facet name="header">Operação</f:facet>
                         <h:outputText value="#{operacao.tipoOperacao}" />
-                    </p:column>
-                    <p:column headerText="Quantidade" styleClass="right">
+                    </h:column>
+                    <h:column headerClass="right">
+                        <f:facet name="header">Quantidade</f:facet>
                         <h:outputText value="#{operacao.quantidade}" />
-                    </p:column>
-                    <p:column headerText="Preço" styleClass="right">
+                    </h:column>
+                    <h:column headerClass="right">
+                        <f:facet name="header">Preço</f:facet>
                         <h:outputText value="#{operacao.valor}">
                             <f:convertNumber minFractionDigits="2" type="currency" />
                         </h:outputText>
-                    </p:column>
-                    <p:column headerText="Total" styleClass="right">
+                    </h:column>
+                    <h:column headerClass="right">
+                        <f:facet name="header">Total</f:facet>
                         <h:outputText value="#{operacao.totalOperacao}">
                             <f:convertNumber minFractionDigits="2" type="currency" />
                         </h:outputText>
-                    </p:column>
-                </p:dataTable>
+                    </h:column>
+                    <h:column>
+                        <p:commandButton action="#{notaCorretagemController.deleteItem(operacao)}" value="d" ajax="true" update="@form" styleClass="btn" />
+                    </h:column>
+                </h:dataTable>
             </h:form>
         </ui:define>
     </ui:composition>
