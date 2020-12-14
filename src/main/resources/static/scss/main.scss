@@ -1,0 +1,102 @@
+/*
+name: Cascade Console Styler CSS
+version:  0.1
+*/
+
+@import "variables";
+/*
+================================================================================
+Tag styles
+==============================================================================
+*/
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+  font-family: 'Courier New', Courier, monospace;
+}
+
+
+body {
+    overflow-y: scroll;
+}
+
+hr {
+  width: 100%;
+  height: 1px;
+  border-width: 0;
+  margin: #{$margin} 0;
+}
+
+a {
+    cursor: pointer;
+}
+
+/*
+================================================================================
+Grid component styles
+==============================================================================
+*/
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  flex: 1 1 100%;
+  margin: 0;
+}
+
+@for $g from 1 through $grid-divisor {
+    .g-#{$g} {
+        $size: $g/$grid-divisor * 100%;
+        width: calc(#{$size} - #{$margin*2});
+    }
+}
+
+// small device
+@media only screen and (max-width: $small-device) {
+    @for $g from 1 through $grid-divisor {
+        .g-s-#{$g} {
+            $size: $g/$grid-divisor * 100%;
+            width: calc(#{$size} - #{$margin*2});
+        }
+    }
+}
+
+// medium device
+@media only screen and (min-width: $small-device) and (max-width: $medium-device) {
+    @for $g from 1 through $grid-divisor {
+        .g-m-#{$g} {
+            $size: $g/$grid-divisor * 100%;
+            width: calc(#{$size} - #{$margin*2});
+        }
+    }
+}
+
+// large device
+@media only screen and (min-width: $medium-device) {
+    @for $g from 1 through $grid-divisor {
+        .g-l-#{$g} {
+            $size: $g/$grid-divisor * 100%;
+            width: calc(#{$size} - #{$margin*2});
+        }
+    }
+}
+
+/*
+================================================================================
+Generic component styles
+==============================================================================
+*/
+.hidden {
+    display: none;
+    @each $size, $device in (s: $small-device, m: $medium-device, l: $large-device, xl: $xlarge-device) {
+      &-#{$size} {
+        @media only screen and (max-width: $device) {
+          display: none;
+        }
+      }
+    }
+}
+

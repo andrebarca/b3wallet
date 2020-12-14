@@ -103,11 +103,6 @@ public class NotaCorretagemController implements BaseController {
     }
 
     public void addItem() {
-        System.out.println("codigo.......:" + this.papel.getCodigo());
-        System.out.println("tipo operacao:" + this.getTipoOperacao());
-        System.out.println("preço........:" + this.getValor());
-        System.out.println("quantidade...:" + this.getQuantidade());
-
         TipoOperacao tipoOperacao = TipoOperacao.valueOf(this.getTipoOperacao());
         Operacao operacao = new Operacao();
         operacao.setPapel(papel);

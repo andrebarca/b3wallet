@@ -13,12 +13,16 @@
         </ui:define>
         <ui:define name="content">
             <h:form name="notaCorretagemForm">
-                <div class="form-control g-9">
-                    <p:outputLabel for="find">Busca:</p:outputLabel>
-                    <p:inputText bind="#{findTerm}" id="find" autocomplete="off" required="false" />
+                <div class="row">
+
+                    <div class="form-control g-6">
+                        <p:inputText bind="#{findTerm}" id="find" autocomplete="off" required="false" />
+                        <p:watermark for="find" value="busca:" id="findWatermark" />
+                    </div>
+                    <div class="form-control g-1">
+                        <p:commandButton styleClass="btn" value="search" action="#{notaCorretagemController.find(findTerm.value)}" />
+                    </div>
                 </div>
-                <h:commandButton value="search" action="#{notaCorretagemController.find(findTerm.value)}" />
-                <h:outputText value="termo: #{findTerm.value}" />
                 <h:dataTable value="#{notaCorretagemController.list()}" var="n" styleClass="table" columnClasses="left,left,right,right,right">
                     <h:column headerClass="left">
                         <f:facet name="header">Número</f:facet>
@@ -44,10 +48,10 @@
                     </h:column>
                     <h:column headerClass="right">
                         <f:facet name="header">
-                            <h:commandButton action="#{notaCorretagemController.add()}" id="new" value="n" class="btn" />
+                            <p:commandButton action="#{notaCorretagemController.add()}" id="new" value="n" class="btn bnt-primary" />
                         </f:facet>
-                        <h:commandButton action="#{notaCorretagemController.edit(n.id)}" value="e" class="btn" />
-                        <h:commandButton action="#{notaCorretagemController.delete(n.id)}" value="r" class="btn" />
+                        <p:commandButton action="#{notaCorretagemController.edit(n.id)}" value="e" class="btn" />
+                        <p:commandButton action="#{notaCorretagemController.delete(n.id)}" value="r" class="btn" />
                     </h:column>
                 </h:dataTable>
             </h:form>

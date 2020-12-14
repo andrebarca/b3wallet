@@ -49,7 +49,7 @@
             <h:form id="formOperacoes" styleClass="form">
                 <!-- operacoes -->
                 <fieldset class="row">
-                    <legend>Operações</legend>
+                    <legend>Adicionar Operação</legend>
                     <div class="row">
                         <div class="form-control g-3">
                             <p:outputLabel for="operacao_tipo">Tipo da operação</p:outputLabel>
@@ -79,41 +79,55 @@
                 
                         <div class="form-control g-2">
                             <p:commandButton value="adicionar" id="operacao_dicionar" update="formOperacoes"
-                                action="#{notaCorretagemController.addItem()}" styleClass="btn btn-primary" />
+                                action="#{notaCorretagemController.addItem()}" styleClass="primary" />
                         </div>
                     </div>
                 </fieldset>
                 <hr class="separator" />
-                <h:dataTable id="notaCorretagem_itens" var="operacao" value="#{notaCorretagemController.selected.operacoes}"
-                    styleClass="table" columnClasses="left,left,right,right,right,right">
-                    <h:column headerClass="left">
-                        <f:facet name="header">Código</f:facet>
+                <p:dataTable id="notaCorretagem_itens"
+                    var="operacao" value="#{notaCorretagemController.selected.operacoes}"
+                    editable="true" editMode="cell"
+                    styleClass="table">
+                    <p:column styleClass="left" headerClass="left" headerText="Código">
                         <h:outputText value="#{operacao.papel.codigo}" />
-                    </h:column>
-                    <h:column headerClass="left">
-                        <f:facet name="header">Operação</f:facet>
+                    </p:column>
+                    <p:column styleClass="left" headerText="Operação">
                         <h:outputText value="#{operacao.tipoOperacao}" />
-                    </h:column>
-                    <h:column headerClass="right">
+                    </p:column>
+                    <p:column styleClass="right">
                         <f:facet name="header">Quantidade</f:facet>
-                        <h:outputText value="#{operacao.quantidade}" />
-                    </h:column>
-                    <h:column headerClass="right">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{operacao.quantidade}" />
+                            </f:facet>
+                            <f:facet name="input">
+                                <p:inputNumber value="#{operacao.quantidade}" decimalPlaces="0" />
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    <p:column styleClass="right">
                         <f:facet name="header">Preço</f:facet>
-                        <h:outputText value="#{operacao.valor}">
-                            <f:convertNumber minFractionDigits="2" type="currency" />
-                        </h:outputText>
-                    </h:column>
-                    <h:column headerClass="right">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{operacao.valor}">
+                                    <f:convertNumber minFractionDigits="2" type="currency" />
+                                </h:outputText>
+                            </f:facet>
+                            <f:facet name="input">
+                                <p:inputNumber value="#{operacao.valor}" decimalPlaces="2" symbol="R$ " />
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    <p:column styleClass="right">
                         <f:facet name="header">Total</f:facet>
                         <h:outputText value="#{operacao.totalOperacao}">
                             <f:convertNumber minFractionDigits="2" type="currency" />
                         </h:outputText>
-                    </h:column>
-                    <h:column>
+                    </p:column>
+                    <p:column styleClass="right">
                         <p:commandButton action="#{notaCorretagemController.deleteItem(operacao)}" value="d" ajax="true" update="@form" styleClass="btn" />
-                    </h:column>
-                </h:dataTable>
+                    </p:column>
+                </p:dataTable>
             </h:form>
         </ui:define>
     </ui:composition>
