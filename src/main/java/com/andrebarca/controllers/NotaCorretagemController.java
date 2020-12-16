@@ -75,24 +75,20 @@ public class NotaCorretagemController implements BaseController {
     
     @Override
     public String save() {
-        System.out.println(this.selected.getNumero());
-        System.out.println(this.selected.getDataPregao());
-        System.out.println(this.selected.getIrrf());
-        System.out.println(this.selected.getcustosOperacionais());
-        this.selected.getOperacoes().forEach(op -> System.out.println(op.getPapel().getCodigo()));
+        this.notaCorretagemRepository.save(this.getSelected());
         return null;
     }
 
     @Override
     public String add() {
         System.out.println("add nota method");
-        this.selected = new NotaCorretagem();
+        this.setSelected(new NotaCorretagem());
         return "form?faces-redirect=true";
     }
 
     @Override
     public String edit(long id) {
-        this.selected = this.notaCorretagemRepository.getById(id);
+        this.setSelected(this.notaCorretagemRepository.getById(id));
         return "form?faces-redirect=true";
     }
 

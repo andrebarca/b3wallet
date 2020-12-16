@@ -1,0 +1,8 @@
+
+.ui-inputfield {
+  width: calc(100% - #{$margin});
+  margin-left: $margin/2;
+  margin-right: $margin/2;
+  border-width: 1px;
+  border-style: solid;  
+}

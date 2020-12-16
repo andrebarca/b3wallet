@@ -1,0 +1,251 @@
+/*
+================================================================================
+Form component styles
+==============================================================================
+*/
+
+.form {
+  $className: &;
+  display: flex;
+  flex-wrap: wrap;
+  flex: 1 1 auto;
+  margin: 0;
+  
+  fieldset {
+    display: inherit;
+    flex-wrap: inherit;
+    flex: inherit;
+    border: thin solid var(--border-color);
+    border-radius: var(--radius);
+    margin: $margin;
+
+    legend {
+      padding: #{$padding/2};
+      user-select: none;
+
+      * + * {
+        margin-left: #{$margin};
+      }
+    }
+  }
+
+  &-group {
+    display: inherit;
+    flex-wrap: inherit;
+    flex: 1 0 100%;
+    padding: $padding 0;
+    justify-content: space-between;
+    border-top: thin solid var();
+  }
+
+
+  @at-root
+  &-control {
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    border-radius: var();
+    margin: $margin;
+    font-size: 1rem;
+    
+
+    input[type="number"] {
+      text-align: right;
+    }
+    
+    input[type="text"],
+    input[type="number"],
+    input[type="password"],
+    input[type="date"],
+    input[type="month"],
+    [type="button"],
+    [type="submit"],
+    textarea,
+    select,
+    button {
+      width: 100%;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="password"],
+    input[type="date"],
+    input[type="month"],
+    textarea,
+    select {
+        flex: 1 0 auto;
+        border-width: 0 0 1px 0;
+        border-color: var();
+        background-color: transparent;
+        height: var();
+        min-height: var();
+        z-index: 1;
+
+        @include disabled-status;
+
+        &:valid, &:focus {
+            outline: none;
+            & ~ label {
+              cursor: default;
+              font-size: 0.8rem;
+              transition: all .1s linear;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+            }
+          }
+
+        &:valid {
+          border-color: var();
+        }
+
+        &:focus {
+          border-color: var();
+        }
+
+        // angular invalid field
+        &:invalid {
+          border-color: var();
+        }
+     }
+
+     label {
+       user-select: none;
+       font-size: 1rem;
+       height: var();
+       margin-left: 0;
+       transition: all .1s linear;
+       z-index: 0;
+     }
+
+    input[type="checkbox"] {
+      & ~ label::before {
+        border-radius: var();
+      }
+    }
+
+    input[type="radio"] {
+      & ~ label {
+
+        &::before {
+          border-radius: 50%;
+        }
+      }
+
+      &:checked ~ label {
+        cursor: default;
+      }
+    }
+
+    input[type="checkbox"], input[type="radio"] {
+      display: none;
+
+      & ~ label {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        height: initial;
+        margin-left: 0;
+
+        &::before {
+          content: ' ';
+          display: inline-block;
+          margin-right: $margin/2;
+          border: 2px solid var();
+          box-sizing: border-box;
+          width: 1rem;
+          height: 1rem;
+        }
+      }
+
+      &:checked ~ label {
+        color: $primary-color;
+        &::before {
+          background: $primary-color;
+        }
+      }
+    }
+
+     textarea {
+         height: initial;
+         resize: vertical;
+    
+         & ~ label {
+            position: absolute;
+            top: var();
+         }
+     }
+
+     //label + field inline
+     &.inline {
+       flex-direction: row;
+      //  align-items: center;
+       margin: 0 #{$margin};
+
+       & > * + * {
+         margin-left: #{$margin / 2};
+       }
+
+       input, textarea, select {
+         font-size: initial;
+         border-width: 0;
+         background-color: transparent;
+         &:valid, &:focus {
+           & ~ label {
+             font-size: initial;
+           }
+         }
+       }
+
+       label {
+         height: initial;
+       }
+     }
+  }
+
+  @at-root  
+  .static-text {
+    display: inline-flex;
+    flex: 1 0 auto;
+    align-items: center;
+    height: var();
+    min-height: var();
+    color: initial;
+    
+    @each $k, $v in (start, center, end) {
+      &.#{$k} {
+        justify-content: flex-#{$v};
+      }
+    }
+  }
+
+  &-title {
+    flex: 1 0 100%;
+    margin-top: 0;
+    padding: #{$padding*2}  #{$padding};
+    border-bottom-style: var();
+    border-bottom-width: var();
+    border-bottom-color: var();
+  }
+
+
+  &-actions {
+    display: flex;
+    justify-content: flex-end;
+    flex: 1 0 100%;
+    padding: $padding;
+    * + * {
+      margin-left: $margin;
+    }
+  }
+
+  @media(min-width: $medium-device) {
+    &-group {
+      flex: inherit;
+      border-top: none;
+    }
+  }
+}
+
+

@@ -4,6 +4,10 @@ version:  0.1
 */
 
 @import "variables";
+@import "mixins";
+@import "table";
+@import "form";
+@import "ui";
 /*
 ================================================================================
 Tag styles
@@ -16,6 +20,7 @@ Tag styles
 
 html {
   font-family: 'Courier New', Courier, monospace;
+  color: var(--text-color);
 }
 
 
@@ -39,6 +44,10 @@ a {
 Grid component styles
 ==============================================================================
 */
+.main, .container {
+  margin: auto;
+  max-width: #{$large-device};
+}
 
 .row {
   display: flex;
