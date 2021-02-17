@@ -10,7 +10,7 @@ import javax.faces.convert.FacesConverter;
 @Component
 @Scope("request")
 @FacesConverter("cnpjConverter")
-public class CnpjConverter implements Converter {
+public class CnpjConverter implements Converter<Object>{
 
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {

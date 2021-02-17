@@ -4,6 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html" 
       xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
     <title>B3WALLET</title>
@@ -34,10 +35,10 @@
                     </h:column>
                     <h:column headerClass="right">
                         <f:facet name="header">
-                            <h:commandButton action="#{notaCorretagemController.add()}" id="new" value="n" />
+                            <p:commandButton action="#{empresaController.add()}" id="new" value="n" />
                         </f:facet>
-                        <h:commandButton action="#{empresaController.edit(e.id)}" id="edit" value="e" />
-                        <h:commandButton action="#{empresaController.delete(e.id)}" id="delete" value="r" />
+                        <p:commandButton action="#{empresaController.edit(e.id)}" id="edit" value="e" />
+                        <p:commandButton action="#{empresaController.delete(e.id)}" id="delete" value="r" />
                     </h:column>
                 </h:dataTable>
             </h:form>

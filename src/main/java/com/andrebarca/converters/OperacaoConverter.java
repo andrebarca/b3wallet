@@ -13,8 +13,8 @@ import com.andrebarca.models.Operacao;
 
 @Component
 @Scope("request")
-@FacesConverter(forClass=Operacao.class, value="operacaoConverter")
-public class OperacaoConverter implements Converter {
+@FacesConverter(value="operacaoConverter")
+public class OperacaoConverter implements Converter<Operacao> {
 
     public OperacaoConverter() {
         
@@ -24,14 +24,14 @@ public class OperacaoConverter implements Converter {
     OperacaoRepository operacaoRepository;
 
     @Override
-    public Object getAsObject(FacesContext context, UIComponent component, String value) {
+    public Operacao getAsObject(FacesContext context, UIComponent component, String value) {
         Long id = Long.getLong(value);
-        return operacaoRepository.findById(id);
+        return operacaoRepository.findById(id).isPresent() ?  operacaoRepository.findById(id).get(): null;
     }
 
     @Override
-    public String getAsString(FacesContext context, UIComponent component, Object value) {
-        return Long.toString(((Operacao) value).getId());
+    public String getAsString(FacesContext context, UIComponent component, Operacao value) {
+        return Long.toString(value.getId());
     }    
     
 }

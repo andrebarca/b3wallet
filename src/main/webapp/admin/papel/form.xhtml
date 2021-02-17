@@ -17,21 +17,27 @@
     <h:body>
         <ui:composition template="/WEB-INF/templates/layout.xhtml">
             <ui:define name="content">
-                <h:form styleClass="form">
-                    <h2 class="form-title">#{papelController.selected.codigo} - #{papelController.selected.empresa.nome}</h2>
+                <h:form id="formPapel" styleClass="form">
+                    <h2 class="form-title">
+                        <h:outputText id="papelTitulo" value="#{papelController.selected.codigo} - #{papelController.selected.empresa.nome}" />
+                    </h2>
                     <div class="form-control g-3">
                         <p:outputLabel for="papel_codigo">Codigo:</p:outputLabel>
-                        <p:inputText value="#{papelController.selected.codigo}" id="papel_codigo" autocomplete="off" required="true" />
+                        <p:inputText value="#{papelController.selected.codigo}" id="papel_codigo" autocomplete="off" required="true">
+                            <p:ajax event="blur" process="@this" update=":formPapel:papelTitulo" />
+                        </p:inputText>
                     </div>
                     <div class="form-control g-9">
                         <p:outputLabel for="papel_empresa">Empresa:</p:outputLabel>
-                        <p:selectOneMenu id="papel_empresa" value="#{papelController.selected.empresa}">
-                            <f:selectItems value="#{empresaController.list()}" var="e" itemLabel="#{e.nome}" itemValue="#{e}" />
+                        <p:selectOneMenu id="papel_empresa" value="#{papelController.selected.empresa}" converter="#{empresaConverter}">
+                            <f:selectItem itemLabel="Selecione" />
+                            <f:selectItems value="#{empresaController.empresas}" var="e" itemLabel="#{e.nome}" itemValue="#{e}" />
+                            <p:ajax event="change" process="@this" update=":formPapel:papelTitulo" />
                         </p:selectOneMenu>
                     </div>
                     <footer class="form-actions">
-                        <h:commandButton onclick="history.back()" id="voltarIndexPapel" type="button" value="voltar" class="btn" />
-                        <h:commandButton action="#{papelController.save()}" id="editPapel" value="salvar" class="btn btn-primary" />
+                        <p:commandButton onclick="history.back()" id="voltarIndexPapel" type="button" value="voltar" class="btn" />
+                        <p:commandButton action="#{papelController.save()}" id="savePapel" value="salvar" class="btn btn-primary" />
                     </footer>
                 </h:form>
             </ui:define>

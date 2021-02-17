@@ -69,4 +69,8 @@ public abstract class Base implements Serializable {
     public String toString() {
         return String.format("%s-[%d]", this.getClass().getName(), id);
     }
+
+    public boolean equals(Object object) {
+        return this.toString().equals(object.toString());
+    }
 }

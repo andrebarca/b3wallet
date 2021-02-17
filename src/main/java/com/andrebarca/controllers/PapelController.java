@@ -6,8 +6,6 @@ import com.andrebarca.repositories.PapelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.context.annotation.SessionScope;
-
-
 @Controller
 @SessionScope
 public class PapelController implements BaseController {
@@ -26,7 +24,10 @@ public class PapelController implements BaseController {
 
     @Override
     public String save() {
-        this.repository.save(this.selected);
+        this.setSelected(this.repository.save(this.selected));
+        System.out.println(this.getSelected().getCodigo());
+        System.out.println(this.getSelected().getEmpresa().getNome());
+        System.out.println(this.getSelected().getEmpresa().getCnpj());
         return "index?faces-redirect=true";
     }
 

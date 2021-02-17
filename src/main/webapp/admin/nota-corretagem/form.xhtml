@@ -23,132 +23,153 @@
             </div>
         </ui:define>
         <ui:define name="content">
-            <h:form id="formNotaCorretagem" styleClass="form">
-                <h2 class="form-title">
-                    <p>Nota de corretagem:
-                        <h:outputText value="#{notaCorretagemController.selected.numero}" />
-                    </p>
-                </h2>
-                <div class="row">
-                    <div class="form-control g-3">
-                        <p:outputLabel for="nota_numero">Número da nota</p:outputLabel>
-                        <p:inputNumber value="#{notaCorretagemController.selected.numero}" id="nota_numero" autocomplete="off"
-                            decimalPlaces="0" thousandSeparator="" required="true" />
-                    </div>
-    
-                    <div class="form-control g-3">
-                        <p:outputLabel for="nota_data_pregao">Data do pregão</p:outputLabel>
-                        <p:calendar value="#{notaCorretagemController.selected.dataPregao}" pattern="dd/MM/yyyy" mask="true" id="nota_data_pregao" required="true" />
-                    </div>
-    
-                    <div class="form-control g-3">
-                        <p:outputLabel for="nota_irrf">IRRF</p:outputLabel>
-                        <p:inputNumber value="#{notaCorretagemController.selected.irrf}" id="nota_irrf"
-                        decimalPlaces="2" symbol="R$ " required="true" />
-                    </div>
-    
-                    <div class="form-control g-3">
-                        <p:outputLabel for="nota_custos_operacionais">Custos operacionais</p:outputLabel>
-                        <p:inputNumber value="#{notaCorretagemController.selected.custosOperacionais}" id="nota_custos_operacionais"
-                        decimalPlaces="2" symbol="R$ " required="true" />
-                    </div>
-                </div>
-                <footer class="form-actions">
-                    <p:commandButton onclick="history.back()" id="voltarIndexNotaCorretagem" value="voltar"
-                        styleClass="btn" />
-                    <p:commandButton action="#{notaCorretagemController.save()}" id="editPapel" value="salvar"
-                        styleClass="btn btn-primary" />
-                </footer>
-            </h:form>
-            <h:form id="formOperacoes" styleClass="form">
-                <!-- operacoes -->
-                <fieldset class="row">
-                    <legend>Adicionar Operação</legend>
+            <h:panelGroup id="notaCorretagemContainer">
+                <h:form id="formNotaCorretagem" styleClass="form">
+                    <h2 class="form-title">
+                        <p>Nota de corretagem:
+                            <h:outputText value="#{notaCorretagemController.selected.numero}" />
+                        </p>
+                    </h2>
                     <div class="row">
                         <div class="form-control g-3">
-                            <p:outputLabel for="operacao_tipo">Tipo da operação</p:outputLabel>
-                            <p:selectOneButton id="operacao_tipo" value="#{notaCorretagemController.tipoOperacao}" unselectable="false">
-                                <f:selectItem itemLabel="Compra" itemValue="COMPRA" />
-                                <f:selectItem itemLabel="Venda" itemValue="VENDA" />
-                            </p:selectOneButton>
+                            <p:outputLabel for="nota_numero">Número da nota</p:outputLabel>
+                            <p:inputNumber value="#{notaCorretagemController.selected.numero}" id="nota_numero" autocomplete="off" decimalPlaces="0" thousandSeparator="" required="true">
+                                <p:ajax event="blur" process="@this" update=":formOperacoes:totalNotaCorretagem"/>
+                            </p:inputNumber>
                         </div>
-                
+
                         <div class="form-control g-3">
-                            <p:outputLabel for="operacao_codigo">Código</p:outputLabel>
-                            <p:autoComplete id="operacao_codigo" value="#{notaCorretagemController.papel}"
-                                completeMethod="#{papelRepository.findByCodigoContainingIgnoreCase}" var="papel"
-                                itemLabel="#{papel.codigo}" itemValue="#{papel}" converter="#{papelConverter}" />
-                
+                            <p:outputLabel for="nota_data_pregao">Data do pregão</p:outputLabel>
+                            <p:calendar value="#{notaCorretagemController.selected.dataPregao}" pattern="dd/MM/yyyy" mask="true" id="nota_data_pregao" required="true">
+                                <p:ajax event="blur" process="@this" update=":formOperacoes:totalNotaCorretagem"/>
+                            </p:calendar>
                         </div>
-                
-                        <div class="form-control g-2">
-                            <p:outputLabel for="operacao_quantidade">Quantidade</p:outputLabel>
-                            <p:inputNumber id="operacao_quantidade" value="#{notaCorretagemController.quantidade}" decimalPlaces="0" />
+        
+                        <div class="form-control g-3">
+                            <p:outputLabel for="nota_custos_operacionais">Custos operacionais</p:outputLabel>
+                            <p:inputNumber value="#{notaCorretagemController.selected.custosOperacionais}" id="nota_custos_operacionais" decimalPlaces="2" symbol="R$ " required="true">
+                                <p:ajax event="blur" process="@this" update=":formOperacoes:totalNotaCorretagem"/>
+                            </p:inputNumber>
                         </div>
-                
-                        <div class="form-control g-2">
-                            <p:outputLabel for="operacao_valor">Preço</p:outputLabel>
-                            <p:inputNumber id="operacao_valor" value="#{notaCorretagemController.valor}" decimalPlaces="2" symbol="R$ " />
+                        
+                        <div class="form-control g-3">
+                            <p:outputLabel for="nota_irrf">IRRF</p:outputLabel>
+                            <p:inputNumber value="#{notaCorretagemController.selected.irrf}" id="nota_irrf" decimalPlaces="2" symbol="R$ "
+                                required="true">
+                                <p:ajax event="blur" process="@this" update=":formOperacoes:totalNotaCorretagem" />
+                            </p:inputNumber>
                         </div>
-                
-                        <div class="form-control g-2">
-                            <p:commandButton value="adicionar" id="operacao_dicionar" update="formOperacoes"
-                                action="#{notaCorretagemController.addItem()}" />
-                        </div>
+
                     </div>
-                </fieldset>
-                <hr class="separator" />
-                <p:dataTable id="notaCorretagem_itens"
-                    var="operacao" value="#{notaCorretagemController.selected.operacoes}"
-                    editable="true" editMode="cell"
-                    styleClass="table">
-                    <p:column styleClass="left" headerClass="left" headerText="Código">
-                        <h:outputText value="#{operacao.papel.codigo}" />
-                    </p:column>
-                    <p:column styleClass="left" headerText="Operação">
-                        <h:outputText value="#{operacao.tipoOperacao}" />
-                    </p:column>
-                    <p:column styleClass="right">
-                        <f:facet name="header">Quantidade</f:facet>
-                        <p:cellEditor>
-                            <f:facet name="output">
-                                <h:outputText value="#{operacao.quantidade}" />
-                            </f:facet>
-                            <f:facet name="input">
-                                <p:inputNumber value="#{operacao.quantidade}" decimalPlaces="0" />
-                            </f:facet>
-                        </p:cellEditor>
-                    </p:column>
-                    <p:column styleClass="right">
-                        <f:facet name="header">Preço</f:facet>
-                        <p:cellEditor>
-                            <f:facet name="output">
-                                <h:outputText value="#{operacao.valor}">
-                                    <f:convertNumber minFractionDigits="2" type="currency" />
-                                </h:outputText>
-                            </f:facet>
-                            <f:facet name="input">
-                                <p:inputNumber value="#{operacao.valor}" decimalPlaces="2" symbol="R$ " />
-                            </f:facet>
-                        </p:cellEditor>
-                    </p:column>
-                    <p:column styleClass="right">
-                        <f:facet name="header">Total</f:facet>
-                        <h:outputText value="#{operacao.totalOperacao}">
+                    <footer class="form-actions">
+                        <p:commandButton onclick="history.back()" id="voltarIndexNotaCorretagem" value="voltar"
+                            styleClass="btn" />
+                        <p:commandButton action="#{notaCorretagemController.save()}" id="saveNota" value="salvar"
+                            styleClass="btn btn-primary" update=":messenger" />
+                    </footer>
+                </h:form>
+                <h:form id="formOperacoes" styleClass="form">
+                    <!-- operacoes -->
+                    <fieldset class="row">
+                        <legend>Adicionar Operação</legend>
+                        <div class="row">
+                            <div class="form-control g-3">
+                                <p:outputLabel for="operacao_tipo">Tipo da operação</p:outputLabel>
+                                <p:selectOneButton id="operacao_tipo" value="#{notaCorretagemController.tipoOperacao}" unselectable="false">
+                                    <f:selectItem itemLabel="Compra" itemValue="COMPRA" />
+                                    <f:selectItem itemLabel="Venda" itemValue="VENDA" />
+                                </p:selectOneButton>
+                            </div>
+                    
+                            <div class="form-control g-3">
+                                <p:outputLabel for="operacao_codigo">Código</p:outputLabel>
+                                <p:autoComplete id="operacao_codigo" value="#{notaCorretagemController.papel}"
+                                    completeMethod="#{papelRepository.findByCodigoContainingIgnoreCase}" var="papel"
+                                    itemLabel="#{papel.codigo}" itemValue="#{papel}" converter="#{papelConverter}" />
+                            </div>
+                    
+                            <div class="form-control g-2">
+                                <p:outputLabel for="operacao_quantidade">Quantidade</p:outputLabel>
+                                <p:inputNumber id="operacao_quantidade" value="#{notaCorretagemController.quantidade}" decimalPlaces="0" />
+                            </div>
+                    
+                            <div class="form-control g-2">
+                                <p:outputLabel for="operacao_valor">Preço</p:outputLabel>
+                                <p:inputNumber id="operacao_valor" value="#{notaCorretagemController.valor}" decimalPlaces="2" symbol="R$ " />
+                            </div>
+                    
+                            <div class="form-control g-2">
+                                <p:commandButton value="adicionar" id="operacao_dicionar" update="formOperacoes"
+                                    action="#{notaCorretagemController.addItem()}" />
+                            </div>
+                        </div>
+                    </fieldset>
+                    <hr class="separator" />
+                    <p:dataTable id="notaCorretagem_itens"
+                        var="operacao" value="#{notaCorretagemController.selected.operacoes}"
+                        editable="true" editMode="cell"
+                        styleClass="table">
+                        <p:column styleClass="left" headerClass="left" headerText="Código">
+                            <h:outputText value="#{operacao.papel.codigo}" />
+                        </p:column>
+                        <p:column styleClass="left" headerText="Operação">
+                            <h:outputText value="#{operacao.tipoOperacao}" />
+                        </p:column>
+                        <p:column styleClass="right">
+                            <f:facet name="header">Quantidade</f:facet>
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:outputText value="#{operacao.quantidade}" />
+                                </f:facet>
+                                <f:facet name="input">
+                                    <p:inputNumber value="#{operacao.quantidade}" decimalPlaces="0">
+                                        <p:ajax event="blur" update=":formOperacoes:totalNotaCorretagem"/>
+                                    </p:inputNumber>
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        <p:column styleClass="right">
+                            <f:facet name="header">Preço</f:facet>
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:outputText value="#{operacao.valor}">
+                                        <f:convertNumber minFractionDigits="2" type="currency" />
+                                    </h:outputText>
+                                </f:facet>
+                                <f:facet name="input">
+                                    <p:inputNumber value="#{operacao.valor}" decimalPlaces="2" symbol="R$ ">
+                                        <p:ajax event="blur" update=":formOperacoes:totalNotaCorretagem" />
+                                    </p:inputNumber>
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        <p:column styleClass="center">
+                            <f:facet name="header">Data da Operação</f:facet>
+                            <h:outputText value="#{operacao.dataOperacao}">
+                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column styleClass="right">
+                            <f:facet name="header">Total</f:facet>
+                            <h:outputText value="#{operacao.totalOperacao}">
+                                <f:convertNumber minFractionDigits="2" type="currency" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column styleClass="right">
+                            <p:commandButton action="#{notaCorretagemController.deleteItem(operacao)}" value="d" update="@form" styleClass="btn" />
+                        </p:column>
+                    </p:dataTable>
+                    <p class="right">
+                        Total:
+                        <h:outputText id="totalNotaCorretagem" value="#{notaCorretagemController.selected.totalNota}">
                             <f:convertNumber minFractionDigits="2" type="currency" />
                         </h:outputText>
-                    </p:column>
-                    <p:column styleClass="right">
-                        <p:commandButton action="#{notaCorretagemController.deleteItem(operacao)}" value="d" ajax="true" update="@form" styleClass="btn" />
-                    </p:column>
-                </p:dataTable>
-            </h:form>
+                    </p>
+                </h:form>
+            </h:panelGroup>
         </ui:define>
         <ui:define name="footer">
             <div class="container">
-                <p>
-                    Total: <h:outputText value="#{notaCorretagemController.selected.totalNota}" />
-                </p>
             </div>
         </ui:define>
     </ui:composition>

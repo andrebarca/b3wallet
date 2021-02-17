@@ -647,4 +647,24 @@ Generic component styles
   }
 }
 
+.header {
+  text-align: center;
+}
+
+.center {
+  text-align: center;
+}
+
+.left {
+  text-align: left;
+}
+
+.right {
+  text-align: right;
+}
+
+.justify {
+  text-align: justify;
+}
+
 /*# sourceMappingURL=styles.css.map */

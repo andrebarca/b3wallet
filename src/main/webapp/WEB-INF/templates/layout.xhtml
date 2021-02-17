@@ -1,6 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"   
       xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:head>
@@ -13,7 +14,13 @@
 </h:head>
 
 <body>
+    <h:form id="messenger">
+        <p:growl id="growl" showDetail="true" />
+    </h:form>
     <header id="header" class="header">
+        <h4>
+            <a href="/">home</a>
+        </h4>
         <ui:insert name="header">
             <ui:include src="/WEB-INF/templates/header.xhtml" />
         </ui:insert>

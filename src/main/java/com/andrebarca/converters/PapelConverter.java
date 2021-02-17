@@ -11,21 +11,21 @@ import com.andrebarca.models.Papel;
 import com.andrebarca.repositories.PapelRepository;
 
 @Component
-@FacesConverter(forClass=Papel.class, value="papelConverter")
-public class PapelConverter implements Converter {
+@FacesConverter(value="papelConverter")
+public class PapelConverter implements Converter<Papel> {
 
     @Autowired
     PapelRepository papelRepository;
 
     @Override
-    public Object getAsObject(FacesContext context, UIComponent component, String value) {
+    public Papel getAsObject(FacesContext context, UIComponent component, String value) {
         Papel papel = papelRepository.findByCodigo(value);
         return papel;
     }
 
     @Override
-    public String getAsString(FacesContext context, UIComponent component, Object value) {
-        return value != null? ((Papel) value).getCodigo(): null;
+    public String getAsString(FacesContext context, UIComponent component, Papel value) {
+        return value != null? value.getCodigo(): null;
     }    
     
 }

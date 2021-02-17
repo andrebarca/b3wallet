@@ -58,7 +58,7 @@ public class ProventoService {
     }
     
     @RequestMapping(value = "/api/proventos/tipos", method = RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> listOptions() {
+    public ResponseEntity<?> listTipos() {
     	return new ResponseEntity<>(TipoProvento.getPropertyList(), HttpStatus.OK);
     }
 

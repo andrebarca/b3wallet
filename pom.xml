@@ -79,7 +79,7 @@
 			<artifactId>jasperreports</artifactId>
 			<version>6.7.0</version>
 		</dependency>
-	</dependencies>
+ </dependencies>
 	<build>
 		<finalName>b3wallet</finalName>
         

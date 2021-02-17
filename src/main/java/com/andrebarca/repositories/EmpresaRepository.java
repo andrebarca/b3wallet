@@ -25,6 +25,9 @@ public interface EmpresaRepository extends CrudRepository<Empresa, Long> {
 
     List<Empresa> findAll(Sort sort);
 
+    Empresa findByNome(String nome);
+    Empresa findByCnpj(String cnpj);
+
     @Modifying
     @Query("delete from Empresa e where e.id = ?1")
     void deleteById(Long id);

@@ -23,7 +23,7 @@
                         <p:commandButton styleClass="btn" value="search" action="#{notaCorretagemController.find(findTerm.value)}" />
                     </div>
                 </div>
-                <h:dataTable value="#{notaCorretagemController.list()}" var="n" styleClass="table" columnClasses="left,left,right,right,right">
+                <h:dataTable value="#{notaCorretagemController.list()}" var="n" styleClass="table" columnClasses="left,left,center,right,right,right">
                     <h:column headerClass="left">
                         <f:facet name="header">Número</f:facet>
                         <h:outputText value="#{n.numero}" />
@@ -31,6 +31,12 @@
                     <h:column headerClass="left">
                         <f:facet name="header">Data</f:facet>
                         <h:outputText value="#{n.dataPregao}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:outputText>
+                    </h:column>
+                    <h:column headerClass="center">
+                        <f:facet name="header">Última atualização</f:facet>
+                        <h:outputText value="#{n.dataAtualizacao}">
                             <f:convertDateTime pattern="dd/MM/yyyy" />
                         </h:outputText>
                     </h:column>

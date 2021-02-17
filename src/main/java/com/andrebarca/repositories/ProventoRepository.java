@@ -25,6 +25,5 @@ public interface ProventoRepository extends CrudRepository<Provento, Long>{
   @Query("delete from Provento d where d.id = ?1")
   void deleteById(Long id);
 
-  List<Provento> findAll(Sort sort);  
-
+  List<Provento> findAll(Sort sort);
 }

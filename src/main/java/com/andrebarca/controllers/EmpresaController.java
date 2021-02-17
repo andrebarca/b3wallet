@@ -4,6 +4,8 @@ import com.andrebarca.models.Empresa;
 import com.andrebarca.repositories.EmpresaRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
 
@@ -49,6 +51,10 @@ public class EmpresaController implements BaseController {
     @Override
     public Iterable<Empresa> list() {
         return this.repository.findAll();
+    }
+
+    public Iterable<Empresa> getEmpresas() {
+        return this.repository.findAll(Sort.by(Direction.ASC, "nome"));
     }
 
     @Override

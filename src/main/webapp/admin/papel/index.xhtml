@@ -3,7 +3,8 @@
     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html" 
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
@@ -32,12 +33,12 @@
                     </h:column>
                     <h:column headerClass="right">
                         <f:facet name="header">
-                            <h:commandButton action="#{papelController.add()}" id="new" value="n"
+                            <p:commandButton action="#{papelController.add()}" id="new" value="n"
                                 class="btn" />
                         </f:facet>
-                        <h:commandButton action="#{papelController.edit(p.id)}" id="edit" value="e"
+                        <p:commandButton action="#{papelController.edit(p.id)}" id="edit" value="e"
                             class="btn" />
-                        <h:commandButton action="#{papelController.delete(e.id)}" id="delete" value="r"
+                        <p:commandButton action="#{papelController.delete(e.id)}" id="delete" value="r"
                             class="btn" />
                     </h:column>
                 </h:dataTable>

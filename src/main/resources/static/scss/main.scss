@@ -109,3 +109,13 @@ Generic component styles
     }
 }
 
+.header {
+    text-align: center;
+}
+
+@each $alignment in ("center", "left", "right", "justify") {
+    .#{$alignment} {
+        text-align: #{$alignment};
+    }
+}
+

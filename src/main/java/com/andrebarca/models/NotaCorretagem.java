@@ -23,6 +23,8 @@ public class NotaCorretagem extends Base {
 
     public NotaCorretagem() {
         this.operacoes = new HashSet<Operacao>();
+        this.custosOperacionais = 0.0;
+        this.irrf = 0.0;
 
     }
 
@@ -74,6 +76,7 @@ public class NotaCorretagem extends Base {
 
     public void addOperacao(Operacao operacao) {
         operacao.setNotaCorretagem(this);
+        operacao.setDataOperacao(this.getDataPregao());
         this.operacoes.add(operacao);
     }
 
@@ -90,6 +93,14 @@ public class NotaCorretagem extends Base {
             op.setNotaCorretagem(this);
         });
         this.operacoes = operacoes;
+    }
+
+    public Double getCustosOperacionais() {
+        return custosOperacionais;
+    }
+
+    public void setCustosOperacionais(Double custosOperacionais) {
+        this.custosOperacionais = custosOperacionais;
     }
 
     /**
@@ -121,11 +132,12 @@ public class NotaCorretagem extends Base {
     }
 
     public Double getTotalTaxas() {
-        return this.custosOperacionais + this.irrf;
+        double total = (this.getCustosOperacionais() + this.getIrrf());
+        return total != 0 ? total * -1 : 0.0;
     }
 
     public Double getTotalNota() {
-        Double total = this.custosOperacionais + this.irrf;
+        Double total = this.getCustosOperacionais() != 0 ? this.getCustosOperacionais() * -1: 0.0;
         for (Operacao op: this.operacoes) {
             total += op.getTipoOperacao() == TipoOperacao.COMPRA ? op.getTotalOperacao() * -1 : op.getTotalOperacao();
         }

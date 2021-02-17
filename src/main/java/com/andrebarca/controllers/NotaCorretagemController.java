@@ -4,7 +4,7 @@ import org.springframework.web.context.annotation.SessionScope;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
+import javax.persistence.EntityNotFoundException;
 
 import com.andrebarca.models.NotaCorretagem;
 import com.andrebarca.models.Operacao;
@@ -12,6 +12,7 @@ import com.andrebarca.models.Papel;
 import com.andrebarca.models.TipoOperacao;
 import com.andrebarca.repositories.NotaCorretagemRepository;
 import com.andrebarca.repositories.PapelRepository;
+import com.ibm.icu.text.MessageFormat;
 
 @Component
 @SessionScope
@@ -75,8 +76,16 @@ public class NotaCorretagemController implements BaseController {
     
     @Override
     public String save() {
-        this.notaCorretagemRepository.save(this.getSelected());
-        return null;
+        try {
+            this.setSelected(this.notaCorretagemRepository.save(this.getSelected()));
+            String message = MessageFormat.format("Nota de corretagem {0} salva", new Object[] {this.getSelected().getNumero()});
+            Messenger.showInfo(message);
+
+        } catch (EntityNotFoundException error) {
+            String message = "Erro ao tentar salvar. Tente mais tarde ou entre em contato com o suporte.";
+            Messenger.showError(message);
+        }
+        return "index?faces-redirect=true";
     }
 
     @Override
@@ -105,6 +114,7 @@ public class NotaCorretagemController implements BaseController {
         operacao.setTipoOperacao(tipoOperacao);
         operacao.setQuantidade(this.getQuantidade());
         operacao.setValor(this.getValor());
+        operacao.setDataOperacao(this.getSelected().getDataPregao());
         this.getSelected().addOperacao(operacao);
         this.resetItemForm();
     }
